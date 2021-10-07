@@ -100,6 +100,7 @@ namespace QuanLyChauCayCanh
 
         private void btnThem_Click(object sender, EventArgs e)
         {
+            ClearErrorMessage();
             var newNV = GetEditingNhanVien();
 
             // các validtion có thể dùng chung
@@ -146,6 +147,11 @@ namespace QuanLyChauCayCanh
         {
             lbMessage.Text = PrefixMessageLabel + msg;
         }
+        public void ClearErrorMessage()
+        {
+            lbMessage.Text = "";
+        }
+
         public void clearInputs()
         {
             if (srcLstNhanVien.Count == 0)

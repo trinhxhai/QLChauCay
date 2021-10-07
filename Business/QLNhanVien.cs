@@ -218,11 +218,12 @@ namespace QuanLyChauCayCanh.Business
 
                         var res = cmd.ExecuteScalar().ToString();
 
-                        bool IsSuccess = res != "0" && res != "-1";
+                        bool IsSuccess = res.Trim() != "0" && res.Trim() != "-1";
                         string CreateMsg = "";
                         if (!IsSuccess)
                         {
                             CreateMsg = res == "0" ? "Mã đã tồn tại" : "Tên tài khoản đã tồn tại";
+                            return (IsSuccess, CreateMsg);
                         }
 
                         return (IsSuccess, res);

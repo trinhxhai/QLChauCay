@@ -86,9 +86,14 @@ namespace QuanLyChauCayCanh
         {
             lbMessage.Text = PrefixMessageLabel + msg;
         }
+        public void ClearErrorMessage()
+        {
+            lbMessage.Text = "";
+        }
 
         private void btnThem_Click(object sender, EventArgs e)
         {
+            ClearErrorMessage();
             var newCLCay = GetEditingLoaiChauCay();
             // các validtion có thể dùng chung
             bool IsValid;

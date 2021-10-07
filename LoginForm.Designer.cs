@@ -52,7 +52,7 @@ namespace QuanLyChauCayCanh
             this.txtTenTaiKhoan.Location = new System.Drawing.Point(278, 51);
             this.txtTenTaiKhoan.Name = "txtTenTaiKhoan";
             this.txtTenTaiKhoan.Size = new System.Drawing.Size(220, 26);
-            this.txtTenTaiKhoan.TabIndex = 7;
+            this.txtTenTaiKhoan.TabIndex = 0;
             // 
             // label2
             // 
@@ -70,7 +70,7 @@ namespace QuanLyChauCayCanh
             this.btnLogin.Location = new System.Drawing.Point(278, 141);
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Size = new System.Drawing.Size(220, 42);
-            this.btnLogin.TabIndex = 9;
+            this.btnLogin.TabIndex = 2;
             this.btnLogin.Text = "Đăng nhập";
             this.btnLogin.UseVisualStyleBackColor = true;
             this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
@@ -81,7 +81,7 @@ namespace QuanLyChauCayCanh
             this.txtMatKhau.Location = new System.Drawing.Point(278, 86);
             this.txtMatKhau.Name = "txtMatKhau";
             this.txtMatKhau.Size = new System.Drawing.Size(220, 26);
-            this.txtMatKhau.TabIndex = 10;
+            this.txtMatKhau.TabIndex = 1;
             this.txtMatKhau.UseSystemPasswordChar = true;
             // 
             // LoginForm

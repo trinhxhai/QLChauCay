@@ -58,7 +58,7 @@ namespace QuanLyChauCayCanh
             this.btnQLNhanVien.Name = "btnQLNhanVien";
             this.btnQLNhanVien.Size = new System.Drawing.Size(221, 56);
             this.btnQLNhanVien.TabIndex = 3;
-            this.btnQLNhanVien.Text = "Quản lí nhân viên";
+            this.btnQLNhanVien.Text = "Quản lý nhân viên";
             this.btnQLNhanVien.UseVisualStyleBackColor = true;
             this.btnQLNhanVien.Click += new System.EventHandler(this.btnQLNhanVien_Click);
             // 
@@ -82,7 +82,7 @@ namespace QuanLyChauCayCanh
             this.btnQLChauCay.Name = "btnQLChauCay";
             this.btnQLChauCay.Size = new System.Drawing.Size(221, 56);
             this.btnQLChauCay.TabIndex = 5;
-            this.btnQLChauCay.Text = "Quản lí chậu cây";
+            this.btnQLChauCay.Text = "Quản lý chậu cây";
             this.btnQLChauCay.UseVisualStyleBackColor = true;
             this.btnQLChauCay.Click += new System.EventHandler(this.btnQLChauCay_Click);
             // 
@@ -93,7 +93,7 @@ namespace QuanLyChauCayCanh
             this.btnQLLoaiChauCay.Name = "btnQLLoaiChauCay";
             this.btnQLLoaiChauCay.Size = new System.Drawing.Size(221, 56);
             this.btnQLLoaiChauCay.TabIndex = 4;
-            this.btnQLLoaiChauCay.Text = "Quản lí loại chậu cây";
+            this.btnQLLoaiChauCay.Text = "Quản lý loại chậu cây";
             this.btnQLLoaiChauCay.UseVisualStyleBackColor = true;
             this.btnQLLoaiChauCay.Click += new System.EventHandler(this.btnQLLoaiChauCay_Click);
             // 
@@ -103,9 +103,9 @@ namespace QuanLyChauCayCanh
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 21F);
             this.label1.Location = new System.Drawing.Point(29, 21);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(350, 32);
+            this.label1.Size = new System.Drawing.Size(382, 32);
             this.label1.TabIndex = 5;
-            this.label1.Text = "Ứng dụng quản lí chậu cây";
+            this.label1.Text = "Ứng dụng bán chậu cây cảnh";
             // 
             // btnDangXuat
             // 
@@ -141,7 +141,7 @@ namespace QuanLyChauCayCanh
             this.Controls.Add(this.btnOpenDangNhap);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Form2";
+            this.Text = "Ứng dụng bán chậu cây cảnh";
             this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -463,9 +463,9 @@ namespace QuanLyChauCayCanh
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 21F);
             this.label1.Location = new System.Drawing.Point(29, 20);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(226, 32);
+            this.label1.Size = new System.Drawing.Size(233, 32);
             this.label1.TabIndex = 27;
-            this.label1.Text = "Quản lí chậu cây";
+            this.label1.Text = "Quản lý chậu cây";
             // 
             // QLChauCayForm
             // 
@@ -484,6 +484,7 @@ namespace QuanLyChauCayCanh
             this.Controls.Add(this.btnXoa);
             this.Controls.Add(this.label1);
             this.Name = "QLChauCayForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "QLChauCayForm";
             this.Load += new System.EventHandler(this.QLChauCayForm_Load);
             this.groupBox1.ResumeLayout(false);

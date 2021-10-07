@@ -21,6 +21,16 @@ namespace QuanLyChauCayCanh
             InitializeComponent();
         }
 
+        private bool CheckLogin()
+        {
+            if (String.IsNullOrEmpty(LoginForm.LoginUserId))
+            {
+                MessageBox.Show("Đăng nhập để có thể sử dụng chức năng");
+                return false;
+            }
+            return true;
+        }
+
         private void btnOpenDangNhap_Click(object sender, EventArgs e)
         {
             LoginForm loginForm = new LoginForm();
@@ -50,11 +60,7 @@ namespace QuanLyChauCayCanh
             btnDangXuat.Hide();
         }
 
-        private void btnQLNhanVien_Click(object sender, EventArgs e)
-        {
-            QLNhanVienForm qlNhanVienForm = new QLNhanVienForm();
-            qlNhanVienForm.ShowDialog();
-        }
+        
 
         private void btnDangXuat_Click(object sender, EventArgs e)
         {
@@ -65,14 +71,32 @@ namespace QuanLyChauCayCanh
             btnDangXuat.Hide();
         }
 
+        private void btnQLNhanVien_Click(object sender, EventArgs e)
+        {
+            if (!CheckLogin())
+            {
+                return;
+            }
+            QLNhanVienForm qlNhanVienForm = new QLNhanVienForm();
+            qlNhanVienForm.ShowDialog();
+        }
+
         private void btnQLLoaiChauCay_Click(object sender, EventArgs e)
         {
+            if (!CheckLogin())
+            {
+                return;
+            }
             QLLoaiChauCayForm qlNhanVienForm = new QLLoaiChauCayForm();
             qlNhanVienForm.ShowDialog();
         }
 
         private void btnQLChauCay_Click(object sender, EventArgs e)
         {
+            if (!CheckLogin())
+            {
+                return;
+            }
             QLChauCayForm qlNhanVienForm = new QLChauCayForm();
             qlNhanVienForm.ShowDialog();
         }

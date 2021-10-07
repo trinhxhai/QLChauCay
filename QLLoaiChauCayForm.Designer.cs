@@ -209,9 +209,9 @@ namespace QuanLyChauCayCanh
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 21F);
             this.label1.Location = new System.Drawing.Point(30, 20);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(210, 32);
+            this.label1.Size = new System.Drawing.Size(217, 32);
             this.label1.TabIndex = 27;
-            this.label1.Text = "Quản lí loại cây";
+            this.label1.Text = "Quản lý loại cây";
             // 
             // btnHuy
             // 
@@ -266,6 +266,7 @@ namespace QuanLyChauCayCanh
             this.Controls.Add(this.btnXoa);
             this.Controls.Add(this.btnLuu);
             this.Name = "QLLoaiChauCayForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "QLLoaiChauCayForm";
             this.Load += new System.EventHandler(this.QLLoaiChauCayForm_Load);
             this.groupBox1.ResumeLayout(false);

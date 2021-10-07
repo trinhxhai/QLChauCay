@@ -23,6 +23,8 @@ namespace QuanLyChauCayCanh
 
         private void QLChauCayForm_Load(object sender, EventArgs e)
         {
+
+
             lsLoaiChauCay = QLLoaiChauCay.GetList();
             lsBxLoaiChauCay.DisplayMember = "Ten";
             lsBxLoaiChauCay.ValueMember = "Id";
@@ -104,6 +106,10 @@ namespace QuanLyChauCayCanh
         {
             lbMessage.Text = PrefixMessageLabel + msg;
         }
+        public void ClearErrorMessage()
+        {
+            lbMessage.Text = "";
+        }
 
         public void LoadList(List<NhanVien> lst)
         {
@@ -162,6 +168,7 @@ namespace QuanLyChauCayCanh
 
         private void btnThem_Click(object sender, EventArgs e)
         {
+            ClearErrorMessage();
             var newCC = GetEditingChauCay();
 
             // các validtion có thể dùng chung

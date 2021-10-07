@@ -145,43 +145,39 @@ namespace QuanLyChauCayCanh.Business
 
             if (String.IsNullOrEmpty(chauCay.Ten))
             {
-                return (false, "Không được để trống tên tài khoản!");
+                return (false, "Không được để trống tên chậu cây!");
             }
             if (String.IsNullOrEmpty(chauCay.ChieuDai))
             {
-                return (false, "Không được để trống mật khẩu chậu cây!");
+                return (false, "Không được để trống chiều dài chậu cây!");
             }
 
             if (String.IsNullOrEmpty(chauCay.ChieuRong))
             {
-                return (false, "Không được để trống tên chậu cây!");
+                return (false, "Không được để trống chiều rộng chậu cây!");
             }
 
             if (String.IsNullOrEmpty(chauCay.ChieuCao))
             {
-                return (false, "Không được để trống giới tính chậu cây!");
+                return (false, "Không được để trống chiều cao chậu cây!");
             }
 
             if (String.IsNullOrEmpty(chauCay.MauSac))
             {
-                return (false, "Không được để trống giới tính chậu cây!");
+                return (false, "Không được để trống màu sắc chậu cây!");
             }
 
-            if (String.IsNullOrEmpty(chauCay.MoTa))
-            {
-                return (false, "Không được để trống số điện thoại chậu cây!");
-            }
             if (String.IsNullOrEmpty(chauCay.SoLuong))
             {
-                return (false, "Không được để trống địa chỉ chậu cây!");
+                return (false, "Không được để trống số lượng chậu cây!");
             }
             if (String.IsNullOrEmpty(chauCay.GiaBan))
             {
-                return (false, "Không được để trống địa chỉ chậu cây!");
+                return (false, "Không được để trống giá bán chậu cây!");
             }
             if (String.IsNullOrEmpty(chauCay.IdLoaiChauCay))
             {
-                return (false, "Không được để trống địa chỉ chậu cây!");
+                return (false, "Không được để trống loại chậu chậu cây!");
             }
 
             return res;
