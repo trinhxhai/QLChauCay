@@ -32,20 +32,20 @@ namespace QuanLyChauCayCanh
             this.btnOpenDangNhap = new System.Windows.Forms.Button();
             this.btnQLNhanVien = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnQLHoaDon = new System.Windows.Forms.Button();
             this.btnQLKhachHang = new System.Windows.Forms.Button();
             this.btnQLChauCay = new System.Windows.Forms.Button();
             this.btnQLLoaiChauCay = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.btnDangXuat = new System.Windows.Forms.Button();
             this.lbLoginUser = new System.Windows.Forms.Label();
-            this.btnQLHoaDon = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnOpenDangNhap
             // 
             this.btnOpenDangNhap.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.btnOpenDangNhap.Location = new System.Drawing.Point(1058, 21);
+            this.btnOpenDangNhap.Location = new System.Drawing.Point(1238, 22);
             this.btnOpenDangNhap.Name = "btnOpenDangNhap";
             this.btnOpenDangNhap.Size = new System.Drawing.Size(124, 34);
             this.btnOpenDangNhap.TabIndex = 2;
@@ -55,10 +55,10 @@ namespace QuanLyChauCayCanh
             // 
             // btnQLNhanVien
             // 
-            this.btnQLNhanVien.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.btnQLNhanVien.Location = new System.Drawing.Point(46, 54);
+            this.btnQLNhanVien.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F);
+            this.btnQLNhanVien.Location = new System.Drawing.Point(45, 98);
             this.btnQLNhanVien.Name = "btnQLNhanVien";
-            this.btnQLNhanVien.Size = new System.Drawing.Size(221, 56);
+            this.btnQLNhanVien.Size = new System.Drawing.Size(384, 161);
             this.btnQLNhanVien.TabIndex = 3;
             this.btnQLNhanVien.Text = "Quản lý nhân viên";
             this.btnQLNhanVien.UseVisualStyleBackColor = true;
@@ -74,17 +74,28 @@ namespace QuanLyChauCayCanh
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.groupBox1.Location = new System.Drawing.Point(35, 78);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1147, 504);
+            this.groupBox1.Size = new System.Drawing.Size(1314, 605);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Chức năng";
             // 
+            // btnQLHoaDon
+            // 
+            this.btnQLHoaDon.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F);
+            this.btnQLHoaDon.Location = new System.Drawing.Point(468, 309);
+            this.btnQLHoaDon.Name = "btnQLHoaDon";
+            this.btnQLHoaDon.Size = new System.Drawing.Size(383, 161);
+            this.btnQLHoaDon.TabIndex = 7;
+            this.btnQLHoaDon.Text = "Quản lí hóa đơn";
+            this.btnQLHoaDon.UseVisualStyleBackColor = true;
+            this.btnQLHoaDon.Click += new System.EventHandler(this.btnQLHoaDon_Click);
+            // 
             // btnQLKhachHang
             // 
-            this.btnQLKhachHang.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.btnQLKhachHang.Location = new System.Drawing.Point(46, 307);
+            this.btnQLKhachHang.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F);
+            this.btnQLKhachHang.Location = new System.Drawing.Point(46, 309);
             this.btnQLKhachHang.Name = "btnQLKhachHang";
-            this.btnQLKhachHang.Size = new System.Drawing.Size(220, 56);
+            this.btnQLKhachHang.Size = new System.Drawing.Size(383, 161);
             this.btnQLKhachHang.TabIndex = 6;
             this.btnQLKhachHang.Text = "Quản lí khách hàng";
             this.btnQLKhachHang.UseVisualStyleBackColor = true;
@@ -92,10 +103,10 @@ namespace QuanLyChauCayCanh
             // 
             // btnQLChauCay
             // 
-            this.btnQLChauCay.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.btnQLChauCay.Location = new System.Drawing.Point(46, 226);
+            this.btnQLChauCay.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F);
+            this.btnQLChauCay.Location = new System.Drawing.Point(879, 98);
             this.btnQLChauCay.Name = "btnQLChauCay";
-            this.btnQLChauCay.Size = new System.Drawing.Size(221, 56);
+            this.btnQLChauCay.Size = new System.Drawing.Size(384, 161);
             this.btnQLChauCay.TabIndex = 5;
             this.btnQLChauCay.Text = "Quản lý chậu cây";
             this.btnQLChauCay.UseVisualStyleBackColor = true;
@@ -103,10 +114,10 @@ namespace QuanLyChauCayCanh
             // 
             // btnQLLoaiChauCay
             // 
-            this.btnQLLoaiChauCay.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.btnQLLoaiChauCay.Location = new System.Drawing.Point(46, 145);
+            this.btnQLLoaiChauCay.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F);
+            this.btnQLLoaiChauCay.Location = new System.Drawing.Point(467, 98);
             this.btnQLLoaiChauCay.Name = "btnQLLoaiChauCay";
-            this.btnQLLoaiChauCay.Size = new System.Drawing.Size(221, 56);
+            this.btnQLLoaiChauCay.Size = new System.Drawing.Size(384, 161);
             this.btnQLLoaiChauCay.TabIndex = 4;
             this.btnQLLoaiChauCay.Text = "Quản lý loại chậu cây";
             this.btnQLLoaiChauCay.UseVisualStyleBackColor = true;
@@ -125,7 +136,7 @@ namespace QuanLyChauCayCanh
             // btnDangXuat
             // 
             this.btnDangXuat.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.btnDangXuat.Location = new System.Drawing.Point(1058, 20);
+            this.btnDangXuat.Location = new System.Drawing.Point(1238, 21);
             this.btnDangXuat.Name = "btnDangXuat";
             this.btnDangXuat.Size = new System.Drawing.Size(124, 34);
             this.btnDangXuat.TabIndex = 7;
@@ -137,23 +148,12 @@ namespace QuanLyChauCayCanh
             // lbLoginUser
             // 
             this.lbLoginUser.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.lbLoginUser.Location = new System.Drawing.Point(883, 21);
+            this.lbLoginUser.Location = new System.Drawing.Point(1063, 22);
             this.lbLoginUser.Name = "lbLoginUser";
             this.lbLoginUser.Size = new System.Drawing.Size(169, 34);
             this.lbLoginUser.TabIndex = 8;
             this.lbLoginUser.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.lbLoginUser.Visible = false;
-            // 
-            // btnQLHoaDon
-            // 
-            this.btnQLHoaDon.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.btnQLHoaDon.Location = new System.Drawing.Point(46, 386);
-            this.btnQLHoaDon.Name = "btnQLHoaDon";
-            this.btnQLHoaDon.Size = new System.Drawing.Size(220, 56);
-            this.btnQLHoaDon.TabIndex = 7;
-            this.btnQLHoaDon.Text = "Quản lí hóa đơn";
-            this.btnQLHoaDon.UseVisualStyleBackColor = true;
-            this.btnQLHoaDon.Click += new System.EventHandler(this.btnQLHoaDon_Click);
             // 
             // MainForm
             // 

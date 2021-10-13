@@ -15,7 +15,6 @@ C:\Users\Admin\Desktop\datsenpai\QuanLyChauCayCanh\bin\Debug\System.Runtime.Comp
 C:\Users\Admin\Desktop\datsenpai\QuanLyChauCayCanh\bin\Debug\System.Security.AccessControl.dll
 C:\Users\Admin\Desktop\datsenpai\QuanLyChauCayCanh\bin\Debug\System.Security.Permissions.dll
 C:\Users\Admin\Desktop\datsenpai\QuanLyChauCayCanh\bin\Debug\System.Security.Principal.Windows.dll
-C:\Users\Admin\Desktop\datsenpai\QuanLyChauCayCanh\obj\Debug\QuanLyChauCayCanh.csproj.AssemblyReference.cache
 C:\Users\Admin\Desktop\datsenpai\QuanLyChauCayCanh\obj\Debug\QuanLyChauCayCanh.QLNhanVienForm.resources
 C:\Users\Admin\Desktop\datsenpai\QuanLyChauCayCanh\obj\Debug\QuanLyChauCayCanh.LoginForm.resources
 C:\Users\Admin\Desktop\datsenpai\QuanLyChauCayCanh\obj\Debug\QuanLyChauCayCanh.MainForm.resources
@@ -43,3 +42,5 @@ C:\Users\Admin\Desktop\datsenpai\QuanLyChauCayCanh\bin\Debug\CrystalDecisions.Re
 C:\Users\Admin\Desktop\datsenpai\QuanLyChauCayCanh\bin\Debug\CrystalDecisions.ReportAppServer.ObjectFactory.dll
 C:\Users\Admin\Desktop\datsenpai\QuanLyChauCayCanh\bin\Debug\stdole.dll
 C:\Users\Admin\Desktop\datsenpai\QuanLyChauCayCanh\bin\Debug\CrystalDecisions.ReportAppServer.CommonControls.dll
+C:\Users\Admin\Desktop\datsenpai\QuanLyChauCayCanh\obj\Debug\QuanLyChauCayCanh.InHoaDonForm.resources
+C:\Users\Admin\Desktop\datsenpai\QuanLyChauCayCanh\obj\Debug\QuanLyChauCayCanh.csproj.AssemblyReference.cache

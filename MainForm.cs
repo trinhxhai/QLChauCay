@@ -14,11 +14,12 @@ namespace QuanLyChauCayCanh
 {
     public partial class MainForm : Form
     {
-        
 
+        public static MainForm mainform;
         public MainForm()
         {
             InitializeComponent();
+            mainform = this;
         }
 
         private bool CheckLogin()
@@ -35,8 +36,14 @@ namespace QuanLyChauCayCanh
         {
             LoginForm loginForm = new LoginForm();
             loginForm.FormClosed += ShowSuccessMsg;
+
             loginForm.ShowDialog();
             
+        }
+
+        public void ShowMainForm(object sender, EventArgs e)
+        {
+            mainform.Show();
         }
 
         public void ShowSuccessMsg(object sender, EventArgs e)
@@ -79,6 +86,8 @@ namespace QuanLyChauCayCanh
                 return;
             }
             QLNhanVienForm qlNhanVienForm = new QLNhanVienForm();
+            qlNhanVienForm.FormClosed += ShowMainForm ;
+            mainform.Hide();
             qlNhanVienForm.ShowDialog();
         }
 
@@ -89,6 +98,8 @@ namespace QuanLyChauCayCanh
                 return;
             }
             QLLoaiChauCayForm form = new QLLoaiChauCayForm();
+            form.FormClosed += ShowMainForm;
+            mainform.Hide();
             form.ShowDialog();
         }
 
@@ -99,6 +110,8 @@ namespace QuanLyChauCayCanh
                 return;
             }
             QLChauCayForm form = new QLChauCayForm();
+            form.FormClosed += ShowMainForm;
+            mainform.Hide();
             form.ShowDialog();
         }
 
@@ -109,6 +122,8 @@ namespace QuanLyChauCayCanh
                 return;
             }
             QLKhachHangForm form = new QLKhachHangForm();
+            form.FormClosed += ShowMainForm;
+            mainform.Hide();
             form.ShowDialog();
         }
 
@@ -119,6 +134,8 @@ namespace QuanLyChauCayCanh
                 return;
             }
             QLHoaDonForm form = new QLHoaDonForm();
+            form.FormClosed += ShowMainForm;
+            mainform.Hide();
             form.ShowDialog();
         }
     }

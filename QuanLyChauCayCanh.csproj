@@ -55,9 +55,17 @@
   <ItemGroup>
     <Compile Include="Business\QLChiTietHoaDon.cs" />
     <Compile Include="Business\QLHoaDon.cs" />
-    <Compile Include="ChiTietHoaDonForm.cs" />
+    <Compile Include="ChiTietHoaDonForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="ChiTietHoaDonForm.Designer.cs">
       <DependentUpon>ChiTietHoaDonForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="InHoaDonForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InHoaDonForm.Designer.cs">
+      <DependentUpon>InHoaDonForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\ChiTietHoaDon.cs" />
     <Compile Include="Business\CommonTask.cs" />
@@ -70,7 +78,7 @@
     <Compile Include="Business\QLLoaiChauCay.cs" />
     <Compile Include="LoginForm.cs">
       <SubType>Form</SubType>
-    </Compile>    
+    </Compile>
     <Compile Include="LoginForm.Designer.cs">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
@@ -93,11 +101,15 @@
     <Compile Include="QLChauCayForm.Designer.cs">
       <DependentUpon>QLChauCayForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="QLHoaDonForm.cs" />
+    <Compile Include="QLHoaDonForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="QLHoaDonForm.Designer.cs">
       <DependentUpon>QLHoaDonForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="QLKhachHangForm.cs" />
+    <Compile Include="QLKhachHangForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="QLKhachHangForm.Designer.cs">
       <DependentUpon>QLKhachHangForm.cs</DependentUpon>
     </Compile>
@@ -115,6 +127,9 @@
     </Compile>
     <EmbeddedResource Include="ChiTietHoaDonForm.resx">
       <DependentUpon>ChiTietHoaDonForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InHoaDonForm.resx">
+      <DependentUpon>InHoaDonForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
@@ -167,6 +182,8 @@
       <Version>5.0.0</Version>
     </PackageReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

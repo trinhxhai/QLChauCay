@@ -83,6 +83,7 @@ namespace QuanLyChauCayCanh
             this.txtMatKhau.Size = new System.Drawing.Size(220, 26);
             this.txtMatKhau.TabIndex = 1;
             this.txtMatKhau.UseSystemPasswordChar = true;
+            this.txtMatKhau.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtMatKhau_KeyDown);
             // 
             // LoginForm
             // 
