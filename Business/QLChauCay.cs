@@ -31,7 +31,8 @@ namespace QuanLyChauCayCanh.Business
                         while (rd.Read())
                         {
                             var res = rd;
-                            
+                            var sb = rd["hinhanh"].ToString();
+
                             var chauCay = new ChauCay()
                             {
                                 Id = rd["idChauCay"].ToString(),
@@ -39,6 +40,7 @@ namespace QuanLyChauCayCanh.Business
                                 ChieuDai = rd["schieudai"].ToString(),
                                 ChieuRong = rd["schieurong"].ToString(),
                                 ChieuCao = rd["schieucao"].ToString(),
+                                HinhAnh = string.IsNullOrEmpty(sb) ? null : (byte[])rd["hinhanh"],
                                 MauSac = rd["smausac"].ToString(),
                                 MoTa = rd["mota"].ToString(),
                                 SoLuong = rd["fSoluong"].ToString(),
@@ -58,10 +60,12 @@ namespace QuanLyChauCayCanh.Business
             catch (SqlException sqlexception)
             {
                 //Response.Write("ERROR ::" + sqlexception.Message);
+                return new List<ChauCay>();
             }
             catch (Exception ex)
             {
                 //Response.Write("ERROR ::" + ex.Message);
+                return new List<ChauCay>();
             }
             finally
             {
@@ -101,6 +105,7 @@ namespace QuanLyChauCayCanh.Business
                                 ChieuDai = rd["schieudai"].ToString(),
                                 ChieuRong = rd["schieurong"].ToString(),
                                 ChieuCao = rd["schieucao"].ToString(),
+                                HinhAnh = CommonTask.stringToBytes(rd["hinhanh"].ToString()),
                                 MauSac = rd["smausac"].ToString(),
                                 MoTa = rd["mota"].ToString(),
                                 SoLuong = rd["fSoluong"].ToString(),
@@ -171,9 +176,26 @@ namespace QuanLyChauCayCanh.Business
             {
                 return (false, "Không được để trống số lượng chậu cây!");
             }
+            else
+            {
+                int tmp;
+                if (!int.TryParse(chauCay.SoLuong, out tmp))
+                {
+                    return (false, "Số lượng là mộtsố!");
+                }
+            }
+
             if (String.IsNullOrEmpty(chauCay.GiaBan))
             {
                 return (false, "Không được để trống giá bán chậu cây!");
+            }
+            else
+            {
+                int tmp;
+                if (!int.TryParse(chauCay.GiaBan, out tmp))
+                {
+                    return (false, "Giá bán là mộtsố!");
+                }
             }
             if (String.IsNullOrEmpty(chauCay.IdLoaiChauCay))
             {
@@ -214,6 +236,9 @@ namespace QuanLyChauCayCanh.Business
 
                         cmd.Parameters.Add(new SqlParameter("@ChieuCao", SqlDbType.Char,9));
                         cmd.Parameters["@ChieuCao"].Value = chauCay.ChieuCao;
+
+                        cmd.Parameters.Add(new SqlParameter("@HinhAnh", SqlDbType.VarBinary, -1));
+                        cmd.Parameters["@HinhAnh"].Value = chauCay.HinhAnh;
 
                         cmd.Parameters.Add(new SqlParameter("@MauSac", SqlDbType.NVarChar, 15));
                         cmd.Parameters["@MauSac"].Value = chauCay.MauSac;
@@ -292,6 +317,9 @@ namespace QuanLyChauCayCanh.Business
 
                         cmd.Parameters.Add(new SqlParameter("@ChieuCao", SqlDbType.Char, 9));
                         cmd.Parameters["@ChieuCao"].Value = chauCay.ChieuCao;
+
+                        cmd.Parameters.Add(new SqlParameter("@HinhAnh", SqlDbType.VarBinary, -1));
+                        cmd.Parameters["@HinhAnh"].Value = chauCay.HinhAnh;
 
                         cmd.Parameters.Add(new SqlParameter("@MauSac", SqlDbType.NVarChar, 15));
                         cmd.Parameters["@MauSac"].Value = chauCay.MauSac;

@@ -135,8 +135,17 @@ namespace QuanLyChauCayCanh
         private void lwLoaiChauCay_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
         {
             var loaiChauCay = srcLstLoaiChauCay.FirstOrDefault(nv => nv.Id == e.Item.Text);
-            FillInfo(loaiChauCay);
-            SuaMode();
+            if (e.IsSelected)
+            {
+                FillInfo(loaiChauCay);
+                SuaMode();
+            }
+            else
+            {
+                clearInputs();
+                ThemMode();
+            }
+
         }
 
         public void FillInfo(LoaiChauCay loaiChauCay)
@@ -200,7 +209,7 @@ namespace QuanLyChauCayCanh
             btnTimKiem_Click(sender, e);
             ThemMode();
 
-            MessageBox.Show("Xóa nhân viên thành công");
+            MessageBox.Show("Xóa loại chậu cây thành công");
         }
 
         private void btnTimKiem_Click(object sender, EventArgs e)

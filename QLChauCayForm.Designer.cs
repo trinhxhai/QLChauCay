@@ -29,7 +29,7 @@ namespace QuanLyChauCayCanh
         /// </summary>
         private void InitializeComponent()
         {
-            this.lsBxLoaiChauCay = new System.Windows.Forms.ListBox();
+            this.components = new System.ComponentModel.Container();
             this.lwChauCay = new System.Windows.Forms.ListView();
             this.Id = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Ten = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -50,6 +50,9 @@ namespace QuanLyChauCayCanh
             this.btnHuyTimKiem = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cbLoaiChauCay = new System.Windows.Forms.ComboBox();
+            this.picBox = new System.Windows.Forms.PictureBox();
+            this.bntAddPic = new System.Windows.Forms.Button();
             this.label12 = new System.Windows.Forms.Label();
             this.txtMoTa = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -71,17 +74,11 @@ namespace QuanLyChauCayCanh
             this.btnHuy = new System.Windows.Forms.Button();
             this.btnXoa = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.openImageDialog = new System.Windows.Forms.OpenFileDialog();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picBox)).BeginInit();
             this.SuspendLayout();
-            // 
-            // lsBxLoaiChauCay
-            // 
-            this.lsBxLoaiChauCay.FormattingEnabled = true;
-            this.lsBxLoaiChauCay.ItemHeight = 20;
-            this.lsBxLoaiChauCay.Location = new System.Drawing.Point(418, 74);
-            this.lsBxLoaiChauCay.Name = "lsBxLoaiChauCay";
-            this.lsBxLoaiChauCay.Size = new System.Drawing.Size(158, 184);
-            this.lsBxLoaiChauCay.TabIndex = 0;
             // 
             // lwChauCay
             // 
@@ -152,7 +149,7 @@ namespace QuanLyChauCayCanh
             // txtChieuCao
             // 
             this.txtChieuCao.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.txtChieuCao.Location = new System.Drawing.Point(132, 222);
+            this.txtChieuCao.Location = new System.Drawing.Point(137, 222);
             this.txtChieuCao.MaxLength = 30;
             this.txtChieuCao.Name = "txtChieuCao";
             this.txtChieuCao.Size = new System.Drawing.Size(250, 23);
@@ -160,7 +157,7 @@ namespace QuanLyChauCayCanh
             // 
             // lbMessage
             // 
-            this.lbMessage.Location = new System.Drawing.Point(61, 454);
+            this.lbMessage.Location = new System.Drawing.Point(42, 512);
             this.lbMessage.Name = "lbMessage";
             this.lbMessage.Size = new System.Drawing.Size(449, 64);
             this.lbMessage.TabIndex = 31;
@@ -227,6 +224,9 @@ namespace QuanLyChauCayCanh
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.cbLoaiChauCay);
+            this.groupBox1.Controls.Add(this.picBox);
+            this.groupBox1.Controls.Add(this.bntAddPic);
             this.groupBox1.Controls.Add(this.label12);
             this.groupBox1.Controls.Add(this.txtMoTa);
             this.groupBox1.Controls.Add(this.label6);
@@ -243,7 +243,6 @@ namespace QuanLyChauCayCanh
             this.groupBox1.Controls.Add(this.label8);
             this.groupBox1.Controls.Add(this.txtTen);
             this.groupBox1.Controls.Add(this.txtGiaBan);
-            this.groupBox1.Controls.Add(this.lsBxLoaiChauCay);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.txtMa);
@@ -251,16 +250,45 @@ namespace QuanLyChauCayCanh
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.groupBox1.Location = new System.Drawing.Point(723, 69);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(590, 546);
+            this.groupBox1.Size = new System.Drawing.Size(590, 600);
             this.groupBox1.TabIndex = 34;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Thông tin chậu cây";
+            // 
+            // cbLoaiChauCay
+            // 
+            this.cbLoaiChauCay.FormattingEnabled = true;
+            this.cbLoaiChauCay.Location = new System.Drawing.Point(138, 469);
+            this.cbLoaiChauCay.Name = "cbLoaiChauCay";
+            this.cbLoaiChauCay.Size = new System.Drawing.Size(250, 28);
+            this.cbLoaiChauCay.TabIndex = 42;
+            // 
+            // picBox
+            // 
+            this.picBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.picBox.Location = new System.Drawing.Point(409, 49);
+            this.picBox.Name = "picBox";
+            this.picBox.Size = new System.Drawing.Size(150, 150);
+            this.picBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picBox.TabIndex = 41;
+            this.picBox.TabStop = false;
+            // 
+            // bntAddPic
+            // 
+            this.bntAddPic.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.bntAddPic.Location = new System.Drawing.Point(409, 205);
+            this.bntAddPic.Name = "bntAddPic";
+            this.bntAddPic.Size = new System.Drawing.Size(150, 30);
+            this.bntAddPic.TabIndex = 37;
+            this.bntAddPic.Text = "Thêm ảnh";
+            this.bntAddPic.UseVisualStyleBackColor = true;
+            this.bntAddPic.Click += new System.EventHandler(this.bntAddPic_Click);
             // 
             // label12
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.label12.Location = new System.Drawing.Point(403, 48);
+            this.label12.Location = new System.Drawing.Point(30, 474);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(104, 17);
             this.label12.TabIndex = 40;
@@ -269,7 +297,7 @@ namespace QuanLyChauCayCanh
             // txtMoTa
             // 
             this.txtMoTa.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.txtMoTa.Location = new System.Drawing.Point(132, 310);
+            this.txtMoTa.Location = new System.Drawing.Point(137, 310);
             this.txtMoTa.MaxLength = 100;
             this.txtMoTa.Multiline = true;
             this.txtMoTa.Name = "txtMoTa";
@@ -289,7 +317,7 @@ namespace QuanLyChauCayCanh
             // txtMauSac
             // 
             this.txtMauSac.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.txtMauSac.Location = new System.Drawing.Point(132, 268);
+            this.txtMauSac.Location = new System.Drawing.Point(137, 268);
             this.txtMauSac.MaxLength = 30;
             this.txtMauSac.Name = "txtMauSac";
             this.txtMauSac.Size = new System.Drawing.Size(250, 23);
@@ -308,7 +336,7 @@ namespace QuanLyChauCayCanh
             // txtChieuRong
             // 
             this.txtChieuRong.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.txtChieuRong.Location = new System.Drawing.Point(132, 176);
+            this.txtChieuRong.Location = new System.Drawing.Point(137, 176);
             this.txtChieuRong.MaxLength = 30;
             this.txtChieuRong.Name = "txtChieuRong";
             this.txtChieuRong.Size = new System.Drawing.Size(250, 23);
@@ -327,7 +355,7 @@ namespace QuanLyChauCayCanh
             // txtChieuDai
             // 
             this.txtChieuDai.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.txtChieuDai.Location = new System.Drawing.Point(132, 131);
+            this.txtChieuDai.Location = new System.Drawing.Point(137, 131);
             this.txtChieuDai.MaxLength = 30;
             this.txtChieuDai.Name = "txtChieuDai";
             this.txtChieuDai.Size = new System.Drawing.Size(250, 23);
@@ -346,7 +374,7 @@ namespace QuanLyChauCayCanh
             // txtTen
             // 
             this.txtTen.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.txtTen.Location = new System.Drawing.Point(132, 89);
+            this.txtTen.Location = new System.Drawing.Point(137, 89);
             this.txtTen.MaxLength = 30;
             this.txtTen.Name = "txtTen";
             this.txtTen.Size = new System.Drawing.Size(250, 23);
@@ -355,7 +383,7 @@ namespace QuanLyChauCayCanh
             // txtGiaBan
             // 
             this.txtGiaBan.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.txtGiaBan.Location = new System.Drawing.Point(132, 423);
+            this.txtGiaBan.Location = new System.Drawing.Point(137, 423);
             this.txtGiaBan.Name = "txtGiaBan";
             this.txtGiaBan.Size = new System.Drawing.Size(250, 23);
             this.txtGiaBan.TabIndex = 13;
@@ -384,7 +412,7 @@ namespace QuanLyChauCayCanh
             // 
             this.txtMa.Enabled = false;
             this.txtMa.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.txtMa.Location = new System.Drawing.Point(132, 47);
+            this.txtMa.Location = new System.Drawing.Point(137, 47);
             this.txtMa.MaxLength = 3;
             this.txtMa.Name = "txtMa";
             this.txtMa.Size = new System.Drawing.Size(250, 23);
@@ -393,7 +421,7 @@ namespace QuanLyChauCayCanh
             // txtSoLuong
             // 
             this.txtSoLuong.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.txtSoLuong.Location = new System.Drawing.Point(132, 378);
+            this.txtSoLuong.Location = new System.Drawing.Point(137, 378);
             this.txtSoLuong.MaxLength = 10;
             this.txtSoLuong.Name = "txtSoLuong";
             this.txtSoLuong.Size = new System.Drawing.Size(250, 23);
@@ -402,7 +430,7 @@ namespace QuanLyChauCayCanh
             // btnThem
             // 
             this.btnThem.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.btnThem.Location = new System.Drawing.Point(773, 634);
+            this.btnThem.Location = new System.Drawing.Point(770, 675);
             this.btnThem.Name = "btnThem";
             this.btnThem.Size = new System.Drawing.Size(108, 40);
             this.btnThem.TabIndex = 30;
@@ -425,7 +453,7 @@ namespace QuanLyChauCayCanh
             // 
             this.btnLuu.Enabled = false;
             this.btnLuu.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.btnLuu.Location = new System.Drawing.Point(912, 634);
+            this.btnLuu.Location = new System.Drawing.Point(909, 675);
             this.btnLuu.Name = "btnLuu";
             this.btnLuu.Size = new System.Drawing.Size(108, 40);
             this.btnLuu.TabIndex = 31;
@@ -437,7 +465,7 @@ namespace QuanLyChauCayCanh
             // 
             this.btnHuy.Enabled = false;
             this.btnHuy.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.btnHuy.Location = new System.Drawing.Point(1175, 634);
+            this.btnHuy.Location = new System.Drawing.Point(1172, 675);
             this.btnHuy.Name = "btnHuy";
             this.btnHuy.Size = new System.Drawing.Size(108, 40);
             this.btnHuy.TabIndex = 33;
@@ -449,7 +477,7 @@ namespace QuanLyChauCayCanh
             // 
             this.btnXoa.Enabled = false;
             this.btnXoa.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.btnXoa.Location = new System.Drawing.Point(1040, 634);
+            this.btnXoa.Location = new System.Drawing.Point(1037, 675);
             this.btnXoa.Name = "btnXoa";
             this.btnXoa.Size = new System.Drawing.Size(108, 40);
             this.btnXoa.TabIndex = 32;
@@ -466,6 +494,16 @@ namespace QuanLyChauCayCanh
             this.label1.Size = new System.Drawing.Size(233, 32);
             this.label1.TabIndex = 27;
             this.label1.Text = "Quản lý chậu cây";
+            // 
+            // openImageDialog
+            // 
+            this.openImageDialog.FileName = "openFileDialog1";
+            // 
+            // imageList1
+            // 
+            this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
+            this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
             // 
             // QLChauCayForm
             // 
@@ -489,14 +527,13 @@ namespace QuanLyChauCayCanh
             this.Load += new System.EventHandler(this.QLChauCayForm_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.ListBox lsBxLoaiChauCay;
         private System.Windows.Forms.ListView lwChauCay;
         private System.Windows.Forms.ColumnHeader Id;
         private System.Windows.Forms.ColumnHeader Ten;
@@ -538,5 +575,10 @@ namespace QuanLyChauCayCanh
         private System.Windows.Forms.ColumnHeader SoLuong;
         private System.Windows.Forms.ColumnHeader GiaBan;
         private System.Windows.Forms.ColumnHeader LoaiChauCay;
+        private System.Windows.Forms.Button bntAddPic;
+        private System.Windows.Forms.OpenFileDialog openImageDialog;
+        private System.Windows.Forms.ImageList imageList1;
+        private System.Windows.Forms.PictureBox picBox;
+        private System.Windows.Forms.ComboBox cbLoaiChauCay;
     }
 }

@@ -15,6 +15,7 @@ namespace QuanLyChauCayCanh.Models
         public string ChieuCao { get; set; }
         public string MauSac { get; set; }
         public string MoTa { get; set; }
+        public byte[] HinhAnh { get; set; }
 
         public string SoLuong { get; set; }
         public string GiaBan { get; set; }

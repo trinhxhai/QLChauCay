@@ -33,8 +33,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AxShockwaveFlashObjects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -46,15 +53,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Business\QLChiTietHoaDon.cs" />
+    <Compile Include="Business\QLHoaDon.cs" />
+    <Compile Include="ChiTietHoaDonForm.cs" />
+    <Compile Include="ChiTietHoaDonForm.Designer.cs">
+      <DependentUpon>ChiTietHoaDonForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ChiTietHoaDon.cs" />
     <Compile Include="Business\CommonTask.cs" />
     <Compile Include="Business\DataBaseConnection.cs" />
+    <Compile Include="Models\HoaDon.cs" />
     <Compile Include="Business\QLChauCay.cs" />
     <Compile Include="Business\QLHeThong.cs" />
+    <Compile Include="Business\QLKhachHang.cs" />
     <Compile Include="Business\QLNhanVien.cs" />
     <Compile Include="Business\QLLoaiChauCay.cs" />
     <Compile Include="LoginForm.cs">
       <SubType>Form</SubType>
-    </Compile>
+    </Compile>    
     <Compile Include="LoginForm.Designer.cs">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
@@ -66,6 +82,7 @@
     </Compile>
     <Compile Include="Models\ApplicationState.cs" />
     <Compile Include="Models\ChauCay.cs" />
+    <Compile Include="Models\KhachHang.cs" />
     <Compile Include="Models\LoaiChauCay.cs" />
     <Compile Include="Models\NhanVien.cs" />
     <Compile Include="Program.cs" />
@@ -75,6 +92,14 @@
     </Compile>
     <Compile Include="QLChauCayForm.Designer.cs">
       <DependentUpon>QLChauCayForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="QLHoaDonForm.cs" />
+    <Compile Include="QLHoaDonForm.Designer.cs">
+      <DependentUpon>QLHoaDonForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="QLKhachHangForm.cs" />
+    <Compile Include="QLKhachHangForm.Designer.cs">
+      <DependentUpon>QLKhachHangForm.cs</DependentUpon>
     </Compile>
     <Compile Include="QLLoaiChauCayForm.cs">
       <SubType>Form</SubType>
@@ -88,6 +113,9 @@
     <Compile Include="QLNhanVienForm.Designer.cs">
       <DependentUpon>QLNhanVienForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="ChiTietHoaDonForm.resx">
+      <DependentUpon>ChiTietHoaDonForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -105,6 +133,12 @@
     </Compile>
     <EmbeddedResource Include="QLChauCayForm.resx">
       <DependentUpon>QLChauCayForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QLHoaDonForm.resx">
+      <DependentUpon>QLHoaDonForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QLKhachHangForm.resx">
+      <DependentUpon>QLKhachHangForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="QLLoaiChauCayForm.resx">
       <DependentUpon>QLLoaiChauCayForm.cs</DependentUpon>

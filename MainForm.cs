@@ -14,7 +14,7 @@ namespace QuanLyChauCayCanh
 {
     public partial class MainForm : Form
     {
-        public static ApplicationState appState;
+        
 
         public MainForm()
         {
@@ -52,6 +52,7 @@ namespace QuanLyChauCayCanh
                     btnOpenDangNhap.Hide();
                     lbLoginUser.Text = "Xin chào, " + nv.Ten;
                     lbLoginUser.Show();
+                    ApplicationState.loginUser = nv;
                     return;
                 }
             }
@@ -87,8 +88,8 @@ namespace QuanLyChauCayCanh
             {
                 return;
             }
-            QLLoaiChauCayForm qlNhanVienForm = new QLLoaiChauCayForm();
-            qlNhanVienForm.ShowDialog();
+            QLLoaiChauCayForm form = new QLLoaiChauCayForm();
+            form.ShowDialog();
         }
 
         private void btnQLChauCay_Click(object sender, EventArgs e)
@@ -97,8 +98,28 @@ namespace QuanLyChauCayCanh
             {
                 return;
             }
-            QLChauCayForm qlNhanVienForm = new QLChauCayForm();
-            qlNhanVienForm.ShowDialog();
+            QLChauCayForm form = new QLChauCayForm();
+            form.ShowDialog();
+        }
+
+        private void btnQLKhachHang_Click(object sender, EventArgs e)
+        {
+            if (!CheckLogin())
+            {
+                return;
+            }
+            QLKhachHangForm form = new QLKhachHangForm();
+            form.ShowDialog();
+        }
+
+        private void btnQLHoaDon_Click(object sender, EventArgs e)
+        {
+            if (!CheckLogin())
+            {
+                return;
+            }
+            QLHoaDonForm form = new QLHoaDonForm();
+            form.ShowDialog();
         }
     }
 }

@@ -15,7 +15,6 @@ namespace QuanLyChauCayCanh
     public partial class QLNhanVienForm : Form
     {
         public static List<NhanVien> srcLstNhanVien;
-
         public static DateTime DefaultTime = DateTime.Now;
         public static string PrefixMessageLabel = "Error: ";
         
@@ -195,6 +194,9 @@ namespace QuanLyChauCayCanh
 
             txtSdt.Text = nv.Sdt.Trim();
             txtDiaChi.Text = nv.DiaChi.Trim();
+
+                
+
         }
 
         public void ThemMode()
@@ -216,8 +218,17 @@ namespace QuanLyChauCayCanh
         private void lwNhanVien_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
         {
             var selectNV = srcLstNhanVien.FirstOrDefault(nv => nv.Id == e.Item.Text);
-            FillInfo(selectNV);
-            SuaMode();
+            if (e.IsSelected)
+            {
+                FillInfo(selectNV);
+                SuaMode();
+            }
+            else
+            {
+                clearInputs();
+                ThemMode();
+            }
+
         }
 
         private void btnLuu_Click(object sender, EventArgs e)

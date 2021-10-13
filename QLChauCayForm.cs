@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using QuanLyChauCayCanh.Models;
 using QuanLyChauCayCanh.Business;
+using System.IO;
+
 namespace QuanLyChauCayCanh
 {
     public partial class QLChauCayForm : Form
@@ -16,6 +18,7 @@ namespace QuanLyChauCayCanh
         public static List<ChauCay> srcLstChauCay;
         public static List<LoaiChauCay> lsLoaiChauCay;
         public static string PrefixMessageLabel = "Error: ";
+        public static byte[] currentImgBytes;
         public QLChauCayForm()
         {
             InitializeComponent();
@@ -26,13 +29,9 @@ namespace QuanLyChauCayCanh
 
 
             lsLoaiChauCay = QLLoaiChauCay.GetList();
-            lsBxLoaiChauCay.DisplayMember = "Ten";
-            lsBxLoaiChauCay.ValueMember = "Id";
-
-            foreach (var lcc in lsLoaiChauCay)
-            {
-                lsBxLoaiChauCay.Items.Add(lcc);
-            }
+            cbLoaiChauCay.DisplayMember = "Ten";
+            cbLoaiChauCay.ValueMember = "Id";
+            cbLoaiChauCay.DataSource = lsLoaiChauCay;
 
             srcLstChauCay = QLChauCay.GetList();
             ReLoadList();
@@ -42,6 +41,7 @@ namespace QuanLyChauCayCanh
         public void LoadList(List<ChauCay> lst)
         {
             lwChauCay.Items.Clear();
+            //lwChauCay.LargeImageList = 
 
             for (int i = 0; i < lst.Count; i++)
             {
@@ -58,6 +58,7 @@ namespace QuanLyChauCayCanh
                 item.SubItems.Add(cc.GiaBan);
                 item.SubItems.Add(cc.IdLoaiChauCay);
                 lwChauCay.Items.Add(item);
+                
             }
 
         }
@@ -100,7 +101,24 @@ namespace QuanLyChauCayCanh
             txtSoLuong.Clear();
             txtGiaBan.Clear();
 
+            SetDefaultImage();
         }
+
+        public void SetDefaultImage()
+        {
+            var appDataPath = GetAppDataPath();
+            var path = appDataPath + "\\DefaultChauCay.png";
+            LoadPic(path);
+            currentImgBytes = new byte[] { };
+        }
+
+        public static string GetAppDataPath()
+        {
+            string[] s = { "\\bin" };
+            string path = Application.StartupPath.Split(s, StringSplitOptions.None)[0] + "\\AppData";
+            return path;
+        }
+
 
         public void SetErrorMessage(string msg)
         {
@@ -142,11 +160,12 @@ namespace QuanLyChauCayCanh
                 ChieuDai = txtChieuDai.Text,
                 ChieuRong = txtChieuRong.Text,
                 ChieuCao = txtChieuCao.Text,
+                HinhAnh = currentImgBytes,
                 MauSac = txtMauSac.Text,
                 MoTa = txtMoTa.Text,
                 SoLuong = txtSoLuong.Text,
                 GiaBan = txtGiaBan.Text,
-                IdLoaiChauCay = ((LoaiChauCay)lsBxLoaiChauCay.SelectedItem)?.Id
+                IdLoaiChauCay = ((LoaiChauCay)cbLoaiChauCay.SelectedItem)?.Id
             };
         }
         public (bool, string) validateInputs(ChauCay chauCay)
@@ -225,14 +244,33 @@ namespace QuanLyChauCayCanh
             txtMoTa.Text = chauCay.MoTa.Trim();
             txtSoLuong.Text = chauCay.SoLuong.Trim();
             txtGiaBan.Text = chauCay.GiaBan.Trim();
-            lsBxLoaiChauCay.SelectedItem = lsLoaiChauCay.FirstOrDefault(e => e.Id == chauCay.IdLoaiChauCay);
+            cbLoaiChauCay.SelectedItem = lsLoaiChauCay.FirstOrDefault(e => e.Id == chauCay.IdLoaiChauCay);
+
+
+            if ( chauCay.HinhAnh != null && chauCay.HinhAnh.Length != 0  && !(chauCay.HinhAnh.Length == 1 && chauCay.HinhAnh[0] == 0)) {
+                picBox.Image = CommonTask.BytesToImage(chauCay.HinhAnh);
+            }
+            else
+            {
+                SetDefaultImage();
+            }
+            
         }
 
         private void lwChauCay_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
         {
             var selectCC = srcLstChauCay.FirstOrDefault(cc => cc.Id == e.Item.Text);
-            FillInfo(selectCC);
-            SuaMode();
+            if (e.IsSelected)
+            {
+                FillInfo(selectCC);
+                SuaMode();
+            }
+            else
+            {
+                clearInputs();
+                ThemMode();
+            }
+
         }
 
         private void btnLuu_Click(object sender, EventArgs e)
@@ -262,6 +300,7 @@ namespace QuanLyChauCayCanh
                 selectNV.ChieuDai = chauCay.ChieuDai;
                 selectNV.ChieuRong = chauCay.ChieuRong;
                 selectNV.ChieuCao = chauCay.ChieuCao;
+                selectNV.HinhAnh = chauCay.HinhAnh;
                 selectNV.MoTa = chauCay.MoTa;
                 selectNV.MauSac = chauCay.MauSac;
                 selectNV.SoLuong = chauCay.SoLuong;
@@ -340,5 +379,51 @@ namespace QuanLyChauCayCanh
                 btnTimKiem_Click(sender, e);
             }
         }
+
+        private void bntAddPic_Click(object sender, EventArgs e)
+        {
+            openImageDialog.ShowDialog();
+            if (openImageDialog.CheckPathExists)
+            {
+                LoadPic(openImageDialog.FileName);
+            }
+            
+        }
+
+        public void LoadPic(string path)
+        {
+            try
+            {
+                var file = System.IO.File.ReadAllBytes(path);
+                currentImgBytes = file;
+                FileInfo fi = new FileInfo(path);
+                var allowExt = CommonTask.AllowImageExtentions();
+                if (!allowExt.Any(str => str== fi.Extension))
+                {
+                    string msg = "Vui lòng chọn ảnh có định dạng: ";
+                    for(int i = 0; i < allowExt.Count;i ++)
+                    {
+                        msg += allowExt[i];
+                        if (i != allowExt.Count - 1)
+                            msg += ", ";
+                        else
+                            msg += "! ";
+
+                    }
+                    SetErrorMessage(msg);
+                }
+                else
+                {
+                    ClearErrorMessage();
+                }
+                picBox.Image = CommonTask.BytesToImage(file);
+            }catch(Exception ex)
+            {
+                // Cancel khi chưa chọn ảnh
+            }
+            
+            
+        }
+        // (hinhanh Varbinary(max))
     }
 }

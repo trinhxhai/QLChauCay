@@ -5,6 +5,7 @@ using System.Data.Common;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using QuanLyChauCayCanh.Models;
 namespace QuanLyChauCayCanh.Business
@@ -137,13 +138,13 @@ namespace QuanLyChauCayCanh.Business
                 return (false, "Không được để trống mã nhân viên!");
             }
             
-            if (String.IsNullOrEmpty(nv.TenTaiKhoan))
+            if (!Regex.IsMatch(nv.TenTaiKhoan, @"^(?![\d])[a-zA-Z0-9]{6,30}$"))
             {
-                return (false, "Không được để trống tên tài khoản!");
+                return (false, "Tên tài khoản gồm từ 6 đến 30 kí tự, không bắt đầu bằng số và không chứa kí tự đặc biệt!");
             }
-            if (String.IsNullOrEmpty(nv.MatKhau))
+            if (!Regex.IsMatch(nv.MatKhau, @"^(?=.{6}$)(?=.*[0-9])(?=.*[A-Z])[a-zA-Z0-9]*"))
             {
-                return (false, "Không được để trống mật khẩu nhân viên!");
+                return (false, "Mật khẩu gồm 6 kí tự, chứa ít nhất 1 kí tự hoa và một số !");
             }
 
             if (String.IsNullOrEmpty(nv.Ten))
@@ -161,9 +162,9 @@ namespace QuanLyChauCayCanh.Business
                 return (false, "Không được để trống ngày sinh nhân viên!");
             }
 
-            if (String.IsNullOrEmpty(nv.Sdt))
+            if (!Regex.IsMatch(nv.Sdt, @"[0-9]{10}"))
             {
-                return (false, "Không được để trống số điện thoại nhân viên!");
+                return (false, "Số điện thoại có đúng 10 số!");
             }
             if (String.IsNullOrEmpty(nv.DiaChi))
             {

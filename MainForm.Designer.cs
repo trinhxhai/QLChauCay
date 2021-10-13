@@ -32,11 +32,13 @@ namespace QuanLyChauCayCanh
             this.btnOpenDangNhap = new System.Windows.Forms.Button();
             this.btnQLNhanVien = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnQLKhachHang = new System.Windows.Forms.Button();
             this.btnQLChauCay = new System.Windows.Forms.Button();
             this.btnQLLoaiChauCay = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.btnDangXuat = new System.Windows.Forms.Button();
             this.lbLoginUser = new System.Windows.Forms.Label();
+            this.btnQLHoaDon = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -64,6 +66,8 @@ namespace QuanLyChauCayCanh
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnQLHoaDon);
+            this.groupBox1.Controls.Add(this.btnQLKhachHang);
             this.groupBox1.Controls.Add(this.btnQLChauCay);
             this.groupBox1.Controls.Add(this.btnQLLoaiChauCay);
             this.groupBox1.Controls.Add(this.btnQLNhanVien);
@@ -74,6 +78,17 @@ namespace QuanLyChauCayCanh
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Chức năng";
+            // 
+            // btnQLKhachHang
+            // 
+            this.btnQLKhachHang.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.btnQLKhachHang.Location = new System.Drawing.Point(46, 307);
+            this.btnQLKhachHang.Name = "btnQLKhachHang";
+            this.btnQLKhachHang.Size = new System.Drawing.Size(220, 56);
+            this.btnQLKhachHang.TabIndex = 6;
+            this.btnQLKhachHang.Text = "Quản lí khách hàng";
+            this.btnQLKhachHang.UseVisualStyleBackColor = true;
+            this.btnQLKhachHang.Click += new System.EventHandler(this.btnQLKhachHang_Click);
             // 
             // btnQLChauCay
             // 
@@ -129,11 +144,22 @@ namespace QuanLyChauCayCanh
             this.lbLoginUser.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.lbLoginUser.Visible = false;
             // 
+            // btnQLHoaDon
+            // 
+            this.btnQLHoaDon.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.btnQLHoaDon.Location = new System.Drawing.Point(46, 386);
+            this.btnQLHoaDon.Name = "btnQLHoaDon";
+            this.btnQLHoaDon.Size = new System.Drawing.Size(220, 56);
+            this.btnQLHoaDon.TabIndex = 7;
+            this.btnQLHoaDon.Text = "Quản lí hóa đơn";
+            this.btnQLHoaDon.UseVisualStyleBackColor = true;
+            this.btnQLHoaDon.Click += new System.EventHandler(this.btnQLHoaDon_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1212, 619);
+            this.ClientSize = new System.Drawing.Size(1384, 761);
             this.Controls.Add(this.lbLoginUser);
             this.Controls.Add(this.btnDangXuat);
             this.Controls.Add(this.label1);
@@ -158,5 +184,7 @@ namespace QuanLyChauCayCanh
         private System.Windows.Forms.Label lbLoginUser;
         private System.Windows.Forms.Button btnQLLoaiChauCay;
         private System.Windows.Forms.Button btnQLChauCay;
+        private System.Windows.Forms.Button btnQLKhachHang;
+        private System.Windows.Forms.Button btnQLHoaDon;
     }
 }
