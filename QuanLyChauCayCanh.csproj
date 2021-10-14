@@ -125,6 +125,12 @@
     <Compile Include="QLNhanVienForm.Designer.cs">
       <DependentUpon>QLNhanVienForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="rptHoaDon.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptHoaDon.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <EmbeddedResource Include="ChiTietHoaDonForm.resx">
       <DependentUpon>ChiTietHoaDonForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -160,6 +166,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="QLNhanVienForm.resx">
       <DependentUpon>QLNhanVienForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="rptHoaDon.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptHoaDon.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

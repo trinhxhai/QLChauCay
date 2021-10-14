@@ -345,46 +345,10 @@ namespace QuanLyChauCayCanh
 
         private void btnPrintHD_Click(object sender, EventArgs e)
         {
-            Graphics g = this.CreateGraphics();
-            bmp = new Bitmap(this.Size.Width + 55, this.Size.Height);
-            Graphics mg = Graphics.FromImage(bmp);
-            int Offset = 0;
-
-            string leftPadding = new string(' ', 15);
-            int paddingTop = 60;
-            
-            // Tiêu đề
-            var str = leftPadding + String.Format("{0,50} \n","HÓA ĐƠN");
-            mg.DrawString(str, new Font("Arial Bold", 16),
-                  new SolidBrush(Color.Black), 0, paddingTop + Offset);
-            Offset += 60;
-
-            // Header
-            str = leftPadding + String.Format("{0,15} {1,30} {2, 15} {3, 15} {4, 15} {5, 15} \n",
-                    "Mã chậu","Tên chậu", "Số lượng","Đơn giá","Khuyến mại","Thành tiền");
-            mg.DrawString(str, new Font("Arial", 13),
-                  new SolidBrush(Color.Black), 0, paddingTop + Offset);
-            var test2 = str;
-            leftPadding = new string(' ', 20);
-            Offset += 40;
-
-            for (int i = 0; i < lwCTHD.Items.Count; i++)
-            {
-                var test = lwCTHD.Items[i].SubItems[0].Text.Trim();
-                // Draw the row details for ? receipt 
-                str = leftPadding + String.Format("{0,15} {1,30} {2, 15} {3, 15} {4, 15} {5, 15} \n", 
-                    lwCTHD.Items[i].SubItems[0].Text.Trim() , lwCTHD.Items[i].SubItems[1].Text.Trim(), lwCTHD.Items[i].SubItems[2].Text.Trim()
-                    , lwCTHD.Items[i].SubItems[3].Text.Trim(), lwCTHD.Items[i].SubItems[4].Text.Trim(), lwCTHD.Items[i].SubItems[5].Text.Trim());
-
-                mg.DrawString(str, new Font("Arial", 13),
-                  new SolidBrush(Color.Black), 0, paddingTop + Offset);
-
-                // Move the next print position 'down the page' ie, y axis increases from top to bottom
-                Offset = Offset + 20;
-            }
-
-            printPreviewDialog1.ShowDialog();
-
+            InHoaDonForm form = new InHoaDonForm();
+            form.HoaDonId = SelectedHoaDon.Id;
+            form.TenKhachHang = cbKhachHang.Text;
+            form.ShowDialog();
         }
 
         private void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)

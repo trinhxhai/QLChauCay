@@ -354,6 +354,7 @@ namespace QuanLyChauCayCanh
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnXoa);
             this.Name = "QLKhachHangForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "QLKhachHang";
             this.Load += new System.EventHandler(this.QLKhachHangForm_Load);
             this.groupBox1.ResumeLayout(false);
