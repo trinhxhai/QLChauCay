@@ -131,6 +131,7 @@ namespace QuanLyChauCayCanh
             this.Ten,
             this.NgaySua,
             this.colNgayTao});
+            this.lwLoaiChauCay.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.lwLoaiChauCay.FullRowSelect = true;
             this.lwLoaiChauCay.GridLines = true;
             this.lwLoaiChauCay.HideSelection = false;

@@ -53,6 +53,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaoCaoThongKeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BaoCaoThongKeForm.Designer.cs">
+      <DependentUpon>BaoCaoThongKeForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Business\BaoCaoThongKe.cs" />
     <Compile Include="Business\QLChiTietHoaDon.cs" />
     <Compile Include="Business\QLHoaDon.cs" />
     <Compile Include="ChiTietHoaDonForm.cs">
@@ -67,6 +74,10 @@
     <Compile Include="InHoaDonForm.Designer.cs">
       <DependentUpon>InHoaDonForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\BCTK_ChauCay.cs" />
+    <Compile Include="Models\BCTK_KhachHang.cs" />
+    <Compile Include="Models\BCTK_LoaiChauCay.cs" />
+    <Compile Include="Models\BCTK_NhanVien.cs" />
     <Compile Include="Models\ChiTietHoaDon.cs" />
     <Compile Include="Business\CommonTask.cs" />
     <Compile Include="Business\DataBaseConnection.cs" />
@@ -131,6 +142,9 @@
       <DependentUpon>rptHoaDon.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <EmbeddedResource Include="BaoCaoThongKeForm.resx">
+      <DependentUpon>BaoCaoThongKeForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ChiTietHoaDonForm.resx">
       <DependentUpon>ChiTietHoaDonForm.cs</DependentUpon>
     </EmbeddedResource>
