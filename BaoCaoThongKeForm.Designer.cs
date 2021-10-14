@@ -67,6 +67,7 @@ namespace QuanLyChauCayCanh
             this.columnHeader9 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader10 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader11 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.btnBackToMain = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // dpFrom
@@ -195,7 +196,7 @@ namespace QuanLyChauCayCanh
             // 
             this.TongThanhTien.Text = "Tổng thành tiền";
             this.TongThanhTien.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.TongThanhTien.Width = 180;
+            this.TongThanhTien.Width = 305;
             // 
             // label4
             // 
@@ -255,7 +256,7 @@ namespace QuanLyChauCayCanh
             // columnHeader1
             // 
             this.columnHeader1.Text = "Mã loại chậu";
-            this.columnHeader1.Width = 80;
+            this.columnHeader1.Width = 100;
             // 
             // columnHeader2
             // 
@@ -272,7 +273,7 @@ namespace QuanLyChauCayCanh
             // 
             this.columnHeader4.Text = "Tổng thành tiền";
             this.columnHeader4.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.columnHeader4.Width = 180;
+            this.columnHeader4.Width = 285;
             // 
             // lwKhachHang
             // 
@@ -328,7 +329,7 @@ namespace QuanLyChauCayCanh
             // 
             this.ThanhTien.Text = "Tổng thành tiền";
             this.ThanhTien.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.ThanhTien.Width = 120;
+            this.ThanhTien.Width = 124;
             // 
             // lwNhanVien
             // 
@@ -378,13 +379,25 @@ namespace QuanLyChauCayCanh
             // 
             this.columnHeader11.Text = "Tổng thành tiền";
             this.columnHeader11.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.columnHeader11.Width = 145;
+            this.columnHeader11.Width = 143;
+            // 
+            // btnBackToMain
+            // 
+            this.btnBackToMain.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.btnBackToMain.Location = new System.Drawing.Point(1206, 12);
+            this.btnBackToMain.Name = "btnBackToMain";
+            this.btnBackToMain.Size = new System.Drawing.Size(108, 40);
+            this.btnBackToMain.TabIndex = 52;
+            this.btnBackToMain.Text = "Quay lại";
+            this.btnBackToMain.UseVisualStyleBackColor = true;
+            this.btnBackToMain.Click += new System.EventHandler(this.btnBackToMain_Click);
             // 
             // BaoCaoThongKeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1384, 761);
+            this.Controls.Add(this.btnBackToMain);
             this.Controls.Add(this.lwNhanVien);
             this.Controls.Add(this.lwKhachHang);
             this.Controls.Add(this.lwLoaiChauCay);
@@ -403,6 +416,7 @@ namespace QuanLyChauCayCanh
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dpFrom);
             this.Name = "BaoCaoThongKeForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "BaoCaoThongKeForm";
             this.Load += new System.EventHandler(this.BaoCaoThongKeForm_Load);
             this.ResumeLayout(false);
@@ -450,5 +464,6 @@ namespace QuanLyChauCayCanh
         private System.Windows.Forms.ColumnHeader columnHeader9;
         private System.Windows.Forms.ColumnHeader columnHeader10;
         private System.Windows.Forms.ColumnHeader columnHeader11;
+        private System.Windows.Forms.Button btnBackToMain;
     }
 }

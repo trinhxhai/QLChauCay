@@ -268,6 +268,11 @@ namespace QuanLyChauCayCanh
             }
         }
 
-
+        private void btnBackToMain_Click(object sender, EventArgs e)
+        {
+            MainForm.mainform.Show();
+            MainForm.mainform.NeedToClosed = false;
+            this.Close();
+        }
     }
 }

@@ -39,6 +39,7 @@ namespace QuanLyChauCayCanh
             this.label1 = new System.Windows.Forms.Label();
             this.btnDangXuat = new System.Windows.Forms.Button();
             this.lbLoginUser = new System.Windows.Forms.Label();
+            this.btnBCTK = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -66,6 +67,7 @@ namespace QuanLyChauCayCanh
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnBCTK);
             this.groupBox1.Controls.Add(this.btnQLHoaDon);
             this.groupBox1.Controls.Add(this.btnQLKhachHang);
             this.groupBox1.Controls.Add(this.btnQLChauCay);
@@ -155,6 +157,17 @@ namespace QuanLyChauCayCanh
             this.lbLoginUser.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.lbLoginUser.Visible = false;
             // 
+            // btnBCTK
+            // 
+            this.btnBCTK.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F);
+            this.btnBCTK.Location = new System.Drawing.Point(880, 309);
+            this.btnBCTK.Name = "btnBCTK";
+            this.btnBCTK.Size = new System.Drawing.Size(383, 161);
+            this.btnBCTK.TabIndex = 8;
+            this.btnBCTK.Text = "Báo cáo thống kê";
+            this.btnBCTK.UseVisualStyleBackColor = true;
+            this.btnBCTK.Click += new System.EventHandler(this.btnBCTK_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -186,5 +199,6 @@ namespace QuanLyChauCayCanh
         private System.Windows.Forms.Button btnQLChauCay;
         private System.Windows.Forms.Button btnQLKhachHang;
         private System.Windows.Forms.Button btnQLHoaDon;
+        private System.Windows.Forms.Button btnBCTK;
     }
 }

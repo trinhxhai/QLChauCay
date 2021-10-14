@@ -181,7 +181,7 @@ namespace QuanLyChauCayCanh.Business
                 int tmp;
                 if (!int.TryParse(chauCay.SoLuong, out tmp))
                 {
-                    return (false, "Số lượng là mộtsố!");
+                    return (false, "Số lượng là một số!");
                 }
             }
 
@@ -194,7 +194,7 @@ namespace QuanLyChauCayCanh.Business
                 int tmp;
                 if (!int.TryParse(chauCay.GiaBan, out tmp))
                 {
-                    return (false, "Giá bán là mộtsố!");
+                    return (false, "Giá bán là một số!");
                 }
             }
             if (String.IsNullOrEmpty(chauCay.IdLoaiChauCay))

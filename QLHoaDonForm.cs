@@ -355,5 +355,12 @@ namespace QuanLyChauCayCanh
         {
             e.Graphics.DrawImage(bmp, 0, 0);
         }
+
+        private void btnBackToMain_Click(object sender, EventArgs e)
+        {
+            MainForm.mainform.Show();
+            MainForm.mainform.NeedToClosed = false;
+            this.Close();
+        }
     }
 }

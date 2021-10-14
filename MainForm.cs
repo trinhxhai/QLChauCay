@@ -16,6 +16,7 @@ namespace QuanLyChauCayCanh
     {
 
         public static MainForm mainform;
+        public bool NeedToClosed = true;
         public MainForm()
         {
             InitializeComponent();
@@ -41,11 +42,6 @@ namespace QuanLyChauCayCanh
             
         }
 
-        public void ShowMainForm(object sender, EventArgs e)
-        {
-            mainform.Show();
-        }
-
         public void ShowSuccessMsg(object sender, EventArgs e)
         {
             if (!String.IsNullOrEmpty(LoginForm.LoginUserId))
@@ -68,12 +64,17 @@ namespace QuanLyChauCayCanh
             btnDangXuat.Hide();
         }
 
-        
+        public void CloseMain(object sender, EventArgs e)
+        {
+            if (NeedToClosed)
+            {
+                this.Close();
+            }
+        }
 
         private void btnDangXuat_Click(object sender, EventArgs e)
         {
             LoginForm.LoginUserId = "";
-
             lbLoginUser.Hide();
             btnOpenDangNhap.Show();
             btnDangXuat.Hide();
@@ -86,8 +87,9 @@ namespace QuanLyChauCayCanh
                 return;
             }
             QLNhanVienForm qlNhanVienForm = new QLNhanVienForm();
-            qlNhanVienForm.FormClosed += ShowMainForm ;
             mainform.Hide();
+            NeedToClosed = true;
+            qlNhanVienForm.Closed += CloseMain;
             qlNhanVienForm.ShowDialog();
         }
 
@@ -98,8 +100,9 @@ namespace QuanLyChauCayCanh
                 return;
             }
             QLLoaiChauCayForm form = new QLLoaiChauCayForm();
-            form.FormClosed += ShowMainForm;
+            NeedToClosed = true;
             mainform.Hide();
+            form.Closed += CloseMain;
             form.ShowDialog();
         }
 
@@ -110,8 +113,9 @@ namespace QuanLyChauCayCanh
                 return;
             }
             QLChauCayForm form = new QLChauCayForm();
-            form.FormClosed += ShowMainForm;
+            NeedToClosed = true;
             mainform.Hide();
+            form.Closed += CloseMain;
             form.ShowDialog();
         }
 
@@ -122,8 +126,9 @@ namespace QuanLyChauCayCanh
                 return;
             }
             QLKhachHangForm form = new QLKhachHangForm();
-            form.FormClosed += ShowMainForm;
+            NeedToClosed = true;
             mainform.Hide();
+            form.Closed += CloseMain;
             form.ShowDialog();
         }
 
@@ -134,8 +139,22 @@ namespace QuanLyChauCayCanh
                 return;
             }
             QLHoaDonForm form = new QLHoaDonForm();
-            form.FormClosed += ShowMainForm;
+            NeedToClosed = true;
             mainform.Hide();
+            form.Closed += CloseMain;
+            form.ShowDialog();
+        }
+
+        private void btnBCTK_Click(object sender, EventArgs e)
+        {
+            if (!CheckLogin())
+            {
+                return;
+            }
+            BaoCaoThongKeForm form = new BaoCaoThongKeForm();
+            NeedToClosed = true;
+            mainform.Hide();
+            form.Closed += CloseMain;
             form.ShowDialog();
         }
     }

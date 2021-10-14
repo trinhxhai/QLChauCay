@@ -259,6 +259,7 @@ namespace QuanLyChauCayCanh
             // 
             // txtThanhTien
             // 
+            this.txtThanhTien.Enabled = false;
             this.txtThanhTien.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F);
             this.txtThanhTien.Location = new System.Drawing.Point(981, 385);
             this.txtThanhTien.Name = "txtThanhTien";

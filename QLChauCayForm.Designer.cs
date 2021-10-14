@@ -76,6 +76,7 @@ namespace QuanLyChauCayCanh
             this.label1 = new System.Windows.Forms.Label();
             this.openImageDialog = new System.Windows.Forms.OpenFileDialog();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.btnBackToMain = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picBox)).BeginInit();
             this.SuspendLayout();
@@ -505,11 +506,23 @@ namespace QuanLyChauCayCanh
             this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
             // 
+            // btnBackToMain
+            // 
+            this.btnBackToMain.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.btnBackToMain.Location = new System.Drawing.Point(1205, 12);
+            this.btnBackToMain.Name = "btnBackToMain";
+            this.btnBackToMain.Size = new System.Drawing.Size(108, 40);
+            this.btnBackToMain.TabIndex = 37;
+            this.btnBackToMain.Text = "Quay lại";
+            this.btnBackToMain.UseVisualStyleBackColor = true;
+            this.btnBackToMain.Click += new System.EventHandler(this.btnBackToMain_Click);
+            // 
             // QLChauCayForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1384, 761);
+            this.Controls.Add(this.btnBackToMain);
             this.Controls.Add(this.lwChauCay);
             this.Controls.Add(this.txtTimKiem);
             this.Controls.Add(this.label11);
@@ -580,5 +593,6 @@ namespace QuanLyChauCayCanh
         private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.PictureBox picBox;
         private System.Windows.Forms.ComboBox cbLoaiChauCay;
+        private System.Windows.Forms.Button btnBackToMain;
     }
 }

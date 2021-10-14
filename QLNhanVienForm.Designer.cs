@@ -69,6 +69,7 @@ namespace QuanLyChauCayCanh
             this.txtTimKiem = new System.Windows.Forms.TextBox();
             this.btnTimKiem = new System.Windows.Forms.Button();
             this.btnHuyTimKiem = new System.Windows.Forms.Button();
+            this.btnBackToMain = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -463,11 +464,23 @@ namespace QuanLyChauCayCanh
             this.btnHuyTimKiem.UseVisualStyleBackColor = true;
             this.btnHuyTimKiem.Click += new System.EventHandler(this.btnHuyTimKiem_Click);
             // 
+            // btnBackToMain
+            // 
+            this.btnBackToMain.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.btnBackToMain.Location = new System.Drawing.Point(1206, 12);
+            this.btnBackToMain.Name = "btnBackToMain";
+            this.btnBackToMain.Size = new System.Drawing.Size(108, 40);
+            this.btnBackToMain.TabIndex = 26;
+            this.btnBackToMain.Text = "Quay lại";
+            this.btnBackToMain.UseVisualStyleBackColor = true;
+            this.btnBackToMain.Click += new System.EventHandler(this.btnBackToMain_Click);
+            // 
             // QLNhanVienForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1384, 761);
+            this.Controls.Add(this.btnBackToMain);
             this.Controls.Add(this.btnHuyTimKiem);
             this.Controls.Add(this.btnTimKiem);
             this.Controls.Add(this.txtTimKiem);
@@ -533,5 +546,6 @@ namespace QuanLyChauCayCanh
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button btnBackToMain;
     }
 }
