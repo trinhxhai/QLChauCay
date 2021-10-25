@@ -257,19 +257,34 @@ namespace QuanLyChauCayCanh
 
             var item = lwKhachHang.Items.Cast<ListViewItem>().FirstOrDefault(it => it.Text == selectLCL.Id);
 
-            lwKhachHang.Items.Remove(item);
-            srcLstKhachHang.Remove(selectLCL);
-            btnTimKiem_Click(sender, e);
-            ThemMode();
+            
 
-            MessageBox.Show("Xóa khách hàng thành công");
+            var confirmResult = MessageBox.Show("Bạn có chắc muốn xóa khách hàng " + selectLCL.Ten + " ?",
+                                     "Xác nhận xóa !",
+                                     MessageBoxButtons.YesNo);
+            if (confirmResult == DialogResult.Yes)
+            {
+                lwKhachHang.Items.Remove(item);
+                srcLstKhachHang.Remove(selectLCL);
+                btnTimKiem_Click(sender, e);
+                ThemMode();
+
+                MessageBox.Show("Xóa khách hàng thành công !");
+            }
+            else
+            {
+            }
         }
 
         private void btnTimKiem_Click(object sender, EventArgs e)
         {
             ThemMode();
             string searchText = txtTimKiem.Text;
-            var filterList = srcLstKhachHang.Where(s => s.Ten.ToLower().Contains(searchText.ToLower())).ToList();
+            var filterList = srcLstKhachHang.Where(s => 
+                s.Ten.ToLower().Contains(searchText.ToLower())
+                || s.SDT.ToLower().Contains(searchText.ToLower())
+                || s.Id.ToLower().Contains(searchText.ToLower())
+            ).ToList();
             if (String.IsNullOrEmpty(searchText.Trim()))
             {
                 filterList = srcLstKhachHang;
@@ -303,6 +318,20 @@ namespace QuanLyChauCayCanh
             MainForm.mainform.Show();
             MainForm.mainform.NeedToClosed = false;
             this.Close();
+        }
+
+        private void txtSDT_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
+            if (!e.Handled)
+            {
+                var khachHang = srcLstKhachHang.FirstOrDefault(kh => kh.SDT == txtSDT.Text + e.KeyChar);
+                if(khachHang != null)
+                {
+                    FillInfo(khachHang);
+                    SuaMode();
+                }
+            }
         }
     }
 }

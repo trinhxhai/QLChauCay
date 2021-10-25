@@ -17,5 +17,7 @@ namespace QuanLyChauCayCanh.Models
         public DateTime NgayMua { get; set; }
         public DateTime ThoiGianTao { get; set; }
         public DateTime ThoiGianSua { get; set; }
+
+        public bool DaIn { get; set; }
     }
 }

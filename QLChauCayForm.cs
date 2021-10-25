@@ -350,14 +350,17 @@ namespace QuanLyChauCayCanh
             btnTimKiem_Click(sender, e);
             ThemMode();
 
-            MessageBox.Show("Xóa nhân viên thành công");
+            MessageBox.Show("Xóa chậu cây thành công");
         }
 
         private void btnTimKiem_Click(object sender, EventArgs e)
         {
             ThemMode();
             string searchText = txtTimKiem.Text;
-            var filterList = srcLstChauCay.Where(s => s.Ten.ToLower().Contains(searchText.ToLower())).ToList();
+            var filterList = srcLstChauCay.Where(s => s.Ten.ToLower().Contains(searchText.ToLower())
+                || s.Id.ToLower().Contains(searchText.ToLower())
+
+            ).ToList();
             if (String.IsNullOrEmpty(searchText.Trim()))
             {
                 filterList = srcLstChauCay;

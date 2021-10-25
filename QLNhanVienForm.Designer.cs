@@ -320,6 +320,7 @@ namespace QuanLyChauCayCanh
             this.txtSdt.Name = "txtSdt";
             this.txtSdt.Size = new System.Drawing.Size(250, 23);
             this.txtSdt.TabIndex = 12;
+            this.txtSdt.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtSdt_KeyPress);
             // 
             // txtMatKhau
             // 

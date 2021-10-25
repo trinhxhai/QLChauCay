@@ -315,6 +315,7 @@ namespace QuanLyChauCayCanh
             this.txtSDT.Name = "txtSDT";
             this.txtSDT.Size = new System.Drawing.Size(250, 23);
             this.txtSDT.TabIndex = 32;
+            this.txtSDT.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtSDT_KeyPress);
             // 
             // label4
             // 

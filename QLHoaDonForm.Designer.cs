@@ -68,6 +68,14 @@ namespace QuanLyChauCayCanh
             this.printDocument1 = new System.Drawing.Printing.PrintDocument();
             this.printPreviewDialog1 = new System.Windows.Forms.PrintPreviewDialog();
             this.btnBackToMain = new System.Windows.Forms.Button();
+            this.dCreateTimeFrom = new System.Windows.Forms.DateTimePicker();
+            this.dCreateTimeTo = new System.Windows.Forms.DateTimePicker();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.dBuyTimeTo = new System.Windows.Forms.DateTimePicker();
+            this.dBuyTimeFrom = new System.Windows.Forms.DateTimePicker();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -99,16 +107,18 @@ namespace QuanLyChauCayCanh
             this.btnHuyTimKiem.TabIndex = 40;
             this.btnHuyTimKiem.Text = "Hủy";
             this.btnHuyTimKiem.UseVisualStyleBackColor = true;
+            this.btnHuyTimKiem.Click += new System.EventHandler(this.btnHuyTimKiem_Click);
             // 
             // btnThemHD
             // 
             this.btnThemHD.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.btnThemHD.Location = new System.Drawing.Point(808, 634);
+            this.btnThemHD.Location = new System.Drawing.Point(1043, 12);
             this.btnThemHD.Name = "btnThemHD";
             this.btnThemHD.Size = new System.Drawing.Size(108, 40);
             this.btnThemHD.TabIndex = 41;
             this.btnThemHD.Text = "Thêm";
             this.btnThemHD.UseVisualStyleBackColor = true;
+            this.btnThemHD.Visible = false;
             this.btnThemHD.Click += new System.EventHandler(this.btnThemHD_Click);
             // 
             // label1
@@ -125,7 +135,7 @@ namespace QuanLyChauCayCanh
             // 
             this.btnHuyHD.Enabled = false;
             this.btnHuyHD.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.btnHuyHD.Location = new System.Drawing.Point(1207, 634);
+            this.btnHuyHD.Location = new System.Drawing.Point(1149, 333);
             this.btnHuyHD.Name = "btnHuyHD";
             this.btnHuyHD.Size = new System.Drawing.Size(108, 40);
             this.btnHuyHD.TabIndex = 44;
@@ -137,7 +147,7 @@ namespace QuanLyChauCayCanh
             // 
             this.btnLuuHD.Enabled = false;
             this.btnLuuHD.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.btnLuuHD.Location = new System.Drawing.Point(944, 634);
+            this.btnLuuHD.Location = new System.Drawing.Point(879, 333);
             this.btnLuuHD.Name = "btnLuuHD";
             this.btnLuuHD.Size = new System.Drawing.Size(108, 40);
             this.btnLuuHD.TabIndex = 42;
@@ -177,9 +187,9 @@ namespace QuanLyChauCayCanh
             this.lwHoaDon.FullRowSelect = true;
             this.lwHoaDon.GridLines = true;
             this.lwHoaDon.HideSelection = false;
-            this.lwHoaDon.Location = new System.Drawing.Point(32, 109);
+            this.lwHoaDon.Location = new System.Drawing.Point(40, 185);
             this.lwHoaDon.Name = "lwHoaDon";
-            this.lwHoaDon.Size = new System.Drawing.Size(581, 565);
+            this.lwHoaDon.Size = new System.Drawing.Size(581, 514);
             this.lwHoaDon.TabIndex = 46;
             this.lwHoaDon.UseCompatibleStateImageBehavior = false;
             this.lwHoaDon.View = System.Windows.Forms.View.Details;
@@ -197,7 +207,7 @@ namespace QuanLyChauCayCanh
             // 
             // lbMessage
             // 
-            this.lbMessage.Location = new System.Drawing.Point(44, 200);
+            this.lbMessage.Location = new System.Drawing.Point(42, 146);
             this.lbMessage.Name = "lbMessage";
             this.lbMessage.Size = new System.Drawing.Size(449, 64);
             this.lbMessage.TabIndex = 31;
@@ -206,7 +216,7 @@ namespace QuanLyChauCayCanh
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.label3.Location = new System.Drawing.Point(55, 86);
+            this.label3.Location = new System.Drawing.Point(54, 51);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(35, 17);
             this.label3.TabIndex = 12;
@@ -216,7 +226,7 @@ namespace QuanLyChauCayCanh
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.label2.Location = new System.Drawing.Point(55, 128);
+            this.label2.Location = new System.Drawing.Point(54, 93);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(92, 17);
             this.label2.TabIndex = 7;
@@ -226,7 +236,7 @@ namespace QuanLyChauCayCanh
             // 
             this.txtMa.Enabled = false;
             this.txtMa.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.txtMa.Location = new System.Drawing.Point(191, 86);
+            this.txtMa.Location = new System.Drawing.Point(190, 51);
             this.txtMa.MaxLength = 3;
             this.txtMa.Name = "txtMa";
             this.txtMa.Size = new System.Drawing.Size(250, 23);
@@ -251,7 +261,7 @@ namespace QuanLyChauCayCanh
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.txtMa);
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.groupBox1.Location = new System.Drawing.Point(657, 390);
+            this.groupBox1.Location = new System.Drawing.Point(647, 72);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(682, 229);
             this.groupBox1.TabIndex = 45;
@@ -261,7 +271,7 @@ namespace QuanLyChauCayCanh
             // cbKhachHang
             // 
             this.cbKhachHang.FormattingEnabled = true;
-            this.cbKhachHang.Location = new System.Drawing.Point(191, 128);
+            this.cbKhachHang.Location = new System.Drawing.Point(190, 89);
             this.cbKhachHang.Name = "cbKhachHang";
             this.cbKhachHang.Size = new System.Drawing.Size(250, 28);
             this.cbKhachHang.TabIndex = 34;
@@ -270,7 +280,7 @@ namespace QuanLyChauCayCanh
             // 
             this.btnXoaHD.Enabled = false;
             this.btnXoaHD.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.btnXoaHD.Location = new System.Drawing.Point(1073, 634);
+            this.btnXoaHD.Location = new System.Drawing.Point(1018, 333);
             this.btnXoaHD.Name = "btnXoaHD";
             this.btnXoaHD.Size = new System.Drawing.Size(108, 40);
             this.btnXoaHD.TabIndex = 43;
@@ -290,7 +300,7 @@ namespace QuanLyChauCayCanh
             this.lwCTHD.FullRowSelect = true;
             this.lwCTHD.GridLines = true;
             this.lwCTHD.HideSelection = false;
-            this.lwCTHD.Location = new System.Drawing.Point(689, 124);
+            this.lwCTHD.Location = new System.Drawing.Point(683, 453);
             this.lwCTHD.Name = "lwCTHD";
             this.lwCTHD.Size = new System.Drawing.Size(611, 213);
             this.lwCTHD.TabIndex = 48;
@@ -331,7 +341,7 @@ namespace QuanLyChauCayCanh
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F);
-            this.label5.Location = new System.Drawing.Point(684, 84);
+            this.label5.Location = new System.Drawing.Point(642, 407);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(301, 26);
             this.label5.TabIndex = 49;
@@ -340,11 +350,11 @@ namespace QuanLyChauCayCanh
             // btnSuaChau
             // 
             this.btnSuaChau.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.btnSuaChau.Location = new System.Drawing.Point(1191, 84);
+            this.btnSuaChau.Location = new System.Drawing.Point(1187, 405);
             this.btnSuaChau.Name = "btnSuaChau";
             this.btnSuaChau.Size = new System.Drawing.Size(108, 35);
             this.btnSuaChau.TabIndex = 51;
-            this.btnSuaChau.Text = "Sửa";
+            this.btnSuaChau.Text = "Thêm CTHD";
             this.btnSuaChau.UseVisualStyleBackColor = true;
             this.btnSuaChau.Click += new System.EventHandler(this.btnSuaChau_Click);
             // 
@@ -352,7 +362,7 @@ namespace QuanLyChauCayCanh
             // 
             this.btnPrintHD.Enabled = false;
             this.btnPrintHD.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.btnPrintHD.Location = new System.Drawing.Point(674, 633);
+            this.btnPrintHD.Location = new System.Drawing.Point(751, 333);
             this.btnPrintHD.Name = "btnPrintHD";
             this.btnPrintHD.Size = new System.Drawing.Size(108, 40);
             this.btnPrintHD.TabIndex = 53;
@@ -364,7 +374,7 @@ namespace QuanLyChauCayCanh
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.label10.Location = new System.Drawing.Point(1271, 355);
+            this.label10.Location = new System.Drawing.Point(1261, 679);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(34, 20);
             this.label10.TabIndex = 64;
@@ -373,7 +383,7 @@ namespace QuanLyChauCayCanh
             // lbTong
             // 
             this.lbTong.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.lbTong.Location = new System.Drawing.Point(1108, 355);
+            this.lbTong.Location = new System.Drawing.Point(1098, 679);
             this.lbTong.Name = "lbTong";
             this.lbTong.Size = new System.Drawing.Size(158, 23);
             this.lbTong.TabIndex = 63;
@@ -383,15 +393,11 @@ namespace QuanLyChauCayCanh
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.label7.Location = new System.Drawing.Point(1049, 355);
+            this.label7.Location = new System.Drawing.Point(1039, 679);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(53, 20);
             this.label7.TabIndex = 62;
             this.label7.Text = "Tổng :";
-            // 
-            // printDocument1
-            // 
-            this.printDocument1.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printDocument1_PrintPage);
             // 
             // printPreviewDialog1
             // 
@@ -415,30 +421,106 @@ namespace QuanLyChauCayCanh
             this.btnBackToMain.UseVisualStyleBackColor = true;
             this.btnBackToMain.Click += new System.EventHandler(this.btnBackToMain_Click);
             // 
+            // dCreateTimeFrom
+            // 
+            this.dCreateTimeFrom.Location = new System.Drawing.Point(144, 122);
+            this.dCreateTimeFrom.Name = "dCreateTimeFrom";
+            this.dCreateTimeFrom.Size = new System.Drawing.Size(150, 20);
+            this.dCreateTimeFrom.TabIndex = 66;
+            // 
+            // dCreateTimeTo
+            // 
+            this.dCreateTimeTo.Location = new System.Drawing.Point(362, 122);
+            this.dCreateTimeTo.Name = "dCreateTimeTo";
+            this.dCreateTimeTo.Size = new System.Drawing.Size(150, 20);
+            this.dCreateTimeTo.TabIndex = 67;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.label4.Location = new System.Drawing.Point(60, 120);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(76, 20);
+            this.label4.TabIndex = 70;
+            this.label4.Text = "Ngày tạo:";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.label6.Location = new System.Drawing.Point(312, 122);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(36, 20);
+            this.label6.TabIndex = 71;
+            this.label6.Text = "đến";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.label8.Location = new System.Drawing.Point(312, 151);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(36, 20);
+            this.label8.TabIndex = 75;
+            this.label8.Text = "đến";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.label9.Location = new System.Drawing.Point(60, 149);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(84, 20);
+            this.label9.TabIndex = 74;
+            this.label9.Text = "Ngày mua:";
+            // 
+            // dBuyTimeTo
+            // 
+            this.dBuyTimeTo.Location = new System.Drawing.Point(362, 151);
+            this.dBuyTimeTo.Name = "dBuyTimeTo";
+            this.dBuyTimeTo.Size = new System.Drawing.Size(150, 20);
+            this.dBuyTimeTo.TabIndex = 73;
+            // 
+            // dBuyTimeFrom
+            // 
+            this.dBuyTimeFrom.Location = new System.Drawing.Point(144, 151);
+            this.dBuyTimeFrom.Name = "dBuyTimeFrom";
+            this.dBuyTimeFrom.Size = new System.Drawing.Size(150, 20);
+            this.dBuyTimeFrom.TabIndex = 72;
+            // 
             // QLHoaDonForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1384, 761);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.dBuyTimeTo);
+            this.Controls.Add(this.dBuyTimeFrom);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.dCreateTimeTo);
+            this.Controls.Add(this.dCreateTimeFrom);
             this.Controls.Add(this.btnBackToMain);
             this.Controls.Add(this.label10);
-            this.Controls.Add(this.lbTong);
-            this.Controls.Add(this.label7);
             this.Controls.Add(this.btnPrintHD);
+            this.Controls.Add(this.btnHuyHD);
+            this.Controls.Add(this.lbTong);
+            this.Controls.Add(this.btnXoaHD);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.btnLuuHD);
             this.Controls.Add(this.btnSuaChau);
+            this.Controls.Add(this.btnThemHD);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.lwCTHD);
             this.Controls.Add(this.txtTimKiem);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.btnHuyTimKiem);
-            this.Controls.Add(this.btnThemHD);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.btnHuyHD);
-            this.Controls.Add(this.btnLuuHD);
             this.Controls.Add(this.lwHoaDon);
             this.Controls.Add(this.btnTimKiem);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.btnXoaHD);
             this.Name = "QLHoaDonForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "QLHoaDonForm";
@@ -490,5 +572,13 @@ namespace QuanLyChauCayCanh
         private System.Drawing.Printing.PrintDocument printDocument1;
         private System.Windows.Forms.PrintPreviewDialog printPreviewDialog1;
         private System.Windows.Forms.Button btnBackToMain;
+        private System.Windows.Forms.DateTimePicker dCreateTimeFrom;
+        private System.Windows.Forms.DateTimePicker dCreateTimeTo;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.DateTimePicker dBuyTimeTo;
+        private System.Windows.Forms.DateTimePicker dBuyTimeFrom;
     }
 }

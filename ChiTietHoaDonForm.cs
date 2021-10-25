@@ -22,6 +22,9 @@ namespace QuanLyChauCayCanh
         public int total = 0;
         public static List<ChiTietHoaDon> srcChiTietHoaDon;
         public static bool IsEditing = false;
+        public static bool IsThemThanhCong = false;
+
+        public static List<String> deletedCTHDId = new List<string>();
 
         public ChiTietHoaDonForm()
         {
@@ -36,6 +39,8 @@ namespace QuanLyChauCayCanh
             ReLoadList();
             clearInputs();
             ThemMode();
+            btnThemHoaDon.Text = QLHoaDonForm.IsThemHoaDon ? "Thêm hóa đơn" : "Lưu hóa đơn";
+            IsThemThanhCong = false;
         }
 
         public void LoadListCTHD(List<ChiTietHoaDon> lst)
@@ -126,6 +131,7 @@ namespace QuanLyChauCayCanh
         {
             //ClearErrorMsg
             //ClearErrorMessage();
+            if (SelectedChauCay == null) return; // *****************
             var newCTHD = GetEditingData();
             // các validtion có thể dùng chung
 
@@ -134,7 +140,7 @@ namespace QuanLyChauCayCanh
             {
                 bool IsSuccess = true;
                 string CreateMsg = "";
-                (IsSuccess, CreateMsg) = QLChiTietHoaDon.Add(newCTHD);
+                // (IsSuccess, CreateMsg) = QLChiTietHoaDon.Add(newCTHD);
 
                 if (IsSuccess)
                 {
@@ -150,7 +156,6 @@ namespace QuanLyChauCayCanh
                     srcChiTietHoaDon.Add(newCTHD);
                     ThemMode();
 
-
                     total += int.Parse(QLChiTietHoaDon.TinhThanhTien(newCTHD.SoLuong, newCTHD.GiaBan, newCTHD.KhuyenMai));
                     lbTong.Text = total.ToString();
                     MessageBox.Show("Thêm chậu cây vào hóa đơn thành công");
@@ -164,13 +169,19 @@ namespace QuanLyChauCayCanh
             else
             {
 
-                bool IsSuccess;
+                bool IsSuccess = true;
                 string EditMsg = "";
-                (IsSuccess, EditMsg) = QLChiTietHoaDon.Edit(newCTHD);
+                //(IsSuccess, EditMsg) = QLChiTietHoaDon.Edit(newCTHD);
 
                 if (IsSuccess)
                 {
-                    srcChiTietHoaDon = QLChiTietHoaDon.GetList(hoaDonId);
+                    //srcChiTietHoaDon = QLChiTietHoaDon.GetList(hoaDonId);
+                    //LoadListCTHD(srcChiTietHoaDon);
+                    var editingCTHD = srcChiTietHoaDon.FirstOrDefault(cthd => cthd.IdChauCay == newCTHD.IdChauCay);
+                    editingCTHD.GiaBan = newCTHD.GiaBan;
+                    editingCTHD.SoLuong = newCTHD.SoLuong;
+                    editingCTHD.TenChauCay = newCTHD.TenChauCay;
+                    editingCTHD.KhuyenMai = newCTHD.KhuyenMai;
                     LoadListCTHD(srcChiTietHoaDon);
                     MessageBox.Show("Sửa loại chậu cây thành công");
                     ThemMode();
@@ -304,8 +315,8 @@ namespace QuanLyChauCayCanh
 
         private void btnXoaChau_Click(object sender, EventArgs e)
         {
-            QLChiTietHoaDon.Delete(new ChiTietHoaDon {IdChauCay = SelectedChauCay.Id , IdHoaDon = hoaDonId });
-
+            //QLChiTietHoaDon.Delete(new ChiTietHoaDon {IdChauCay = SelectedChauCay.Id , IdHoaDon = hoaDonId });
+            deletedCTHDId.Add(SelectedChauCay.Id);
             var lwitem = lwCTHD.Items.Cast<ListViewItem>().FirstOrDefault(it => it.Text == SelectedChauCay.Id);
 
             
@@ -318,7 +329,7 @@ namespace QuanLyChauCayCanh
 
             
 
-            MessageBox.Show("Xóa loại chậu cây thành công");
+            MessageBox.Show("Xóa chi tiết hóa đơn thành công");
         }
 
 
@@ -326,7 +337,8 @@ namespace QuanLyChauCayCanh
         {
             ThemMode();
             string searchText = txtTimKiem.Text;
-            var filterList = srcLstChauCay.Where(s => s.Ten.ToLower().Contains(searchText.ToLower())).ToList();
+            var filterList = srcLstChauCay.Where(s => s.Ten.ToLower().Contains(searchText.ToLower())
+            || s.Id.ToLower().Contains(searchText.ToLower())).ToList();
             if (String.IsNullOrEmpty(searchText.Trim()))
             {
                 filterList = srcLstChauCay;
@@ -347,6 +359,31 @@ namespace QuanLyChauCayCanh
         {
             txtTimKiem.Text = String.Empty;
             ReLoadList();
+        }
+
+        private void btnThemHoaDon_Click(object sender, EventArgs e)
+        {
+            var newHoaDon = QLHoaDonForm.AddingHoaDon;
+            bool IsSuccess = true;
+            string CreateMsg ="";
+            if(QLHoaDonForm.IsThemHoaDon)
+                (IsSuccess, CreateMsg) = QLHoaDon.Add(newHoaDon);
+            foreach(var ct in srcChiTietHoaDon)
+            {
+                QLChiTietHoaDon.AddOrEdit(ct);
+            }
+            foreach(var idChauCay in deletedCTHDId)
+            {
+                if(srcChiTietHoaDon.FirstOrDefault(cthd => cthd.IdChauCay == idChauCay) == null)
+                {
+                    QLChiTietHoaDon.Delete(new ChiTietHoaDon { 
+                        IdChauCay = idChauCay, 
+                        IdHoaDon = newHoaDon.Id 
+                    });
+                }
+            }
+            IsThemThanhCong = true;
+            this.Close();
         }
     }
 }

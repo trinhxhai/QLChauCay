@@ -67,6 +67,7 @@ namespace QuanLyChauCayCanh
             this.thanhTien = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lbTong = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
+            this.btnThemHoaDon = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnThem
@@ -76,7 +77,7 @@ namespace QuanLyChauCayCanh
             this.btnThem.Name = "btnThem";
             this.btnThem.Size = new System.Drawing.Size(421, 44);
             this.btnThem.TabIndex = 7;
-            this.btnThem.Text = "Thêm";
+            this.btnThem.Text = "Thêm chậu cây ";
             this.btnThem.UseVisualStyleBackColor = true;
             this.btnThem.Click += new System.EventHandler(this.btnThem_Click);
             // 
@@ -386,11 +387,23 @@ namespace QuanLyChauCayCanh
             this.label10.TabIndex = 61;
             this.label10.Text = "vnd";
             // 
+            // btnThemHoaDon
+            // 
+            this.btnThemHoaDon.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
+            this.btnThemHoaDon.Location = new System.Drawing.Point(22, 452);
+            this.btnThemHoaDon.Name = "btnThemHoaDon";
+            this.btnThemHoaDon.Size = new System.Drawing.Size(533, 72);
+            this.btnThemHoaDon.TabIndex = 62;
+            this.btnThemHoaDon.Text = "Thêm hóa đơn";
+            this.btnThemHoaDon.UseVisualStyleBackColor = true;
+            this.btnThemHoaDon.Click += new System.EventHandler(this.btnThemHoaDon_Click);
+            // 
             // ChiTietHoaDonForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1286, 525);
+            this.ClientSize = new System.Drawing.Size(1286, 536);
+            this.Controls.Add(this.btnThemHoaDon);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.lbTong);
             this.Controls.Add(this.label7);
@@ -461,5 +474,6 @@ namespace QuanLyChauCayCanh
         private System.Windows.Forms.ColumnHeader thanhTien;
         private System.Windows.Forms.Label lbTong;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Button btnThemHoaDon;
     }
 }

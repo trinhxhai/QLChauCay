@@ -30,7 +30,6 @@ namespace QuanLyChauCayCanh.Business
 
                         while (rd.Read())
                         {
-                            var res = rd;
                             var sb = rd["hinhanh"].ToString();
 
                             var chauCay = new ChauCay()
@@ -89,7 +88,7 @@ namespace QuanLyChauCayCanh.Business
                     using (var cmd = conObject.CreateCommand())
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.CommandText = "GetNhanVien";
+                        cmd.CommandText = "GetChauCay";
 
                         cmd.Parameters.Add(new SqlParameter("@Id", SqlDbType.Char, 3));
                         cmd.Parameters["@Id"].Value = Id;
@@ -98,21 +97,22 @@ namespace QuanLyChauCayCanh.Business
 
                         if (rd.Read())
                         {
+                            var sb = rd["hinhanh"].ToString();
                             chauCay = new ChauCay()
                             {
-                                Id = rd["idChauCay"].ToString(),
-                                Ten = rd["tenChauCay"].ToString(),
+                                Id = rd["idChaucay"].ToString(),
+                                Ten = rd["tenChaucay"].ToString(),
                                 ChieuDai = rd["schieudai"].ToString(),
                                 ChieuRong = rd["schieurong"].ToString(),
                                 ChieuCao = rd["schieucao"].ToString(),
-                                HinhAnh = CommonTask.stringToBytes(rd["hinhanh"].ToString()),
+                                HinhAnh = string.IsNullOrEmpty(sb) ? null : (byte[])rd["hinhanh"],
                                 MauSac = rd["smausac"].ToString(),
                                 MoTa = rd["mota"].ToString(),
                                 SoLuong = rd["fSoluong"].ToString(),
                                 GiaBan = rd["fGiaban"].ToString(),
-                                IdLoaiChauCay = rd["IdLoaichaucay"].ToString(),
-                                ThoiGianTao = CommonTask.StrToDate(rd["dThoiGianTao"].ToString()),
-                                ThoiGianSua = CommonTask.StrToDate(rd["dThoiGianSua"].ToString()),
+                                IdLoaiChauCay = rd["idLoaichaucay"].ToString(),
+                                ThoiGianTao = CommonTask.StrToDate(rd["dThoigiantao"].ToString()),
+                                ThoiGianSua = CommonTask.StrToDate(rd["dThoigiansua"].ToString()),
                             };
 
                         }
@@ -369,6 +369,63 @@ namespace QuanLyChauCayCanh.Business
             }
             return (false, "Lỗi không xác định !");
         }
+
+        public static (bool, string) UpdateSoLuongCay(ChauCay chauCay)
+        {
+            DbConnection conObject = DataBaseConnection.GetDatabaseConnection();
+            try
+            {
+                conObject.Open();
+                if (conObject.State == ConnectionState.Open)
+                {
+                    //Response.Write("Database Connection is Open");
+
+
+                    using (var cmd = conObject.CreateCommand())
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.CommandText = "UpdateSoLuongCay";
+
+
+                        cmd.Parameters.Add(new SqlParameter("@Id", SqlDbType.Char, 3));
+                        cmd.Parameters["@Id"].Value = chauCay.Id;
+
+                        cmd.Parameters.Add(new SqlParameter("@SoLuong", SqlDbType.Char, 3));
+                        cmd.Parameters["@SoLuong"].Value = chauCay.SoLuong;
+
+
+                        cmd.UpdatedRowSource = UpdateRowSource.OutputParameters;
+
+                        var res = cmd.ExecuteScalar().ToString();
+
+                        bool IsSuccess = res != "0" && res != "-1";
+                        string CreateMsg = "";
+                        if (!IsSuccess)
+                        {
+                            CreateMsg = res == "0" ? "Mã không tồn tại" : "Tên tài khoản đã tồn tại";
+                        }
+
+                        return (IsSuccess, res);
+                    }
+
+                }
+
+            }
+            catch (SqlException sqlexception)
+            {
+                return (false, "Lỗi sql !");
+            }
+            catch (Exception ex)
+            {
+                return (false, "Lỗi không xác định !");
+            }
+            finally
+            {
+                conObject.Close();
+            }
+            return (false, "Lỗi không xác định !");
+        }
+
         public static void Delete(ChauCay chauCay)
         {
             DbConnection conObject = DataBaseConnection.GetDatabaseConnection();
@@ -406,6 +463,6 @@ namespace QuanLyChauCayCanh.Business
                 conObject.Close();
             }
         }
-
+    
     }
 }

@@ -149,6 +149,15 @@ namespace QuanLyChauCayCanh.Business
                         {
                             CreateMsg = "Mã đã tồn tại";
                         }
+                        else
+                        {
+                            var chauCay = QLChauCay.GetById(ctHD.IdChauCay);
+                            QLChauCay.UpdateSoLuongCay(new ChauCay()
+                            {
+                                Id = ctHD.IdChauCay,
+                                SoLuong = (int.Parse(chauCay.SoLuong) - int.Parse(ctHD.SoLuong)).ToString()
+                            }) ;
+                        }
 
                         return (IsSuccess, CreateMsg);
                     }
@@ -172,7 +181,10 @@ namespace QuanLyChauCayCanh.Business
         }
         public static (bool, string) Edit(ChiTietHoaDon ctHD)
         {
+            var chauCay = QLChauCay.GetById(ctHD.IdChauCay);
+            var chiTietHoaDon = QLChiTietHoaDon.GetById(ctHD.IdHoaDon, ctHD.IdChauCay);
             DbConnection conObject = DataBaseConnection.GetDatabaseConnection();
+
             try
             {
                 conObject.Open();
@@ -214,6 +226,16 @@ namespace QuanLyChauCayCanh.Business
                         {
                             CreateMsg = "Mã không tồn tại";
                         }
+                        else
+                        {
+                            conObject.Close();
+                            int delta = chiTietHoaDon == null ? int.Parse(ctHD.SoLuong) : int.Parse(ctHD.SoLuong) - int.Parse(chiTietHoaDon.SoLuong);
+                            int conLai = int.Parse(chauCay.SoLuong) - delta;
+                            chauCay.SoLuong = conLai.ToString();
+                            QLChauCay.UpdateSoLuongCay(chauCay);
+
+                        }
+                        conObject.Close();
 
                         return (IsSuccess, CreateMsg);
                     }
@@ -235,8 +257,92 @@ namespace QuanLyChauCayCanh.Business
             }
             return (false, "Lỗi không xác định !");
         }
+
+        public static (bool, string) AddOrEdit(ChiTietHoaDon ctHD)
+        {
+            var chauCay = QLChauCay.GetById(ctHD.IdChauCay);
+
+            var chiTietHoaDon = QLChiTietHoaDon.GetById(ctHD.IdHoaDon,ctHD.IdChauCay);
+
+            DbConnection conObject = DataBaseConnection.GetDatabaseConnection();
+            try
+            {
+                conObject.Open();
+                if (conObject.State == ConnectionState.Open)
+                {
+                    //Response.Write("Database Connection is Open");
+
+
+                    using (var cmd = conObject.CreateCommand())
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.CommandText = "Them_hoac_SuaChiTietHoaDon";
+
+
+                        cmd.Parameters.Add(new SqlParameter("@IdHD", SqlDbType.Char, 3));
+                        cmd.Parameters["@IdHD"].Value = ctHD.IdHoaDon;
+
+                        cmd.Parameters.Add(new SqlParameter("@IdChauCay", SqlDbType.Char, 30));
+                        cmd.Parameters["@IdChauCay"].Value = ctHD.IdChauCay;
+
+                        cmd.Parameters.Add(new SqlParameter("@Gia", SqlDbType.Char, 9));
+                        cmd.Parameters["@Gia"].Value = ctHD.GiaBan;
+
+                        cmd.Parameters.Add(new SqlParameter("@KhuyenMai", SqlDbType.Char, 9));
+                        cmd.Parameters["@KhuyenMai"].Value = ctHD.KhuyenMai;
+
+                        cmd.Parameters.Add(new SqlParameter("@Soluong", SqlDbType.Char, 3));
+                        cmd.Parameters["@Soluong"].Value = ctHD.SoLuong;
+
+
+                        cmd.UpdatedRowSource = UpdateRowSource.OutputParameters;
+
+                        var res = cmd.ExecuteScalar().ToString();
+
+                        bool IsSuccess = res != "0";
+                        string CreateMsg = "";
+                        if (!IsSuccess)
+                        {
+                            CreateMsg = "Mã hóa đơn hoặc mã chậu không tồn tại";
+                        }
+                        else
+                        {
+                            conObject.Close();
+
+                            int delta = chiTietHoaDon == null ? int.Parse(ctHD.SoLuong) : int.Parse(ctHD.SoLuong) - int.Parse(chiTietHoaDon.SoLuong);
+                            int conLai = int.Parse(chauCay.SoLuong) - delta;
+                            chauCay.SoLuong = conLai.ToString();
+                            QLChauCay.UpdateSoLuongCay(chauCay);
+
+                        }
+
+                        return (IsSuccess, CreateMsg);
+                    }
+
+                }
+
+            }
+            catch (SqlException sqlexception)
+            {
+                return (false, "Lỗi sql !");
+            }
+            catch (Exception ex)
+            {
+                return (false, "Lỗi không xác định !");
+            }
+            finally
+            {
+                conObject.Close();
+            }
+            return (false, "Lỗi Không xác định !");
+        }
+
         public static void Delete(ChiTietHoaDon ctHD)
         {
+            var chauCay = QLChauCay.GetById(ctHD.IdChauCay);
+
+            var chiTietHoaDon = QLChiTietHoaDon.GetById(ctHD.IdHoaDon, ctHD.IdChauCay);
+
             DbConnection conObject = DataBaseConnection.GetDatabaseConnection();
             try
             {
@@ -258,6 +364,11 @@ namespace QuanLyChauCayCanh.Business
 
                         var res = cmd.ExecuteNonQuery();
 
+                        int delta = chiTietHoaDon == null ? 0: int.Parse(ctHD.SoLuong);
+                        int conLai = int.Parse(chauCay.SoLuong) + delta;
+                        chauCay.SoLuong = conLai.ToString();
+                        QLChauCay.UpdateSoLuongCay(chauCay);
+
                     }
 
                 }
@@ -275,10 +386,10 @@ namespace QuanLyChauCayCanh.Business
             }
         }
 
-        public static LoaiChauCay GetById(string IdHoaDon, string IdChauCay)
+        public static ChiTietHoaDon GetById(string IdHoaDon, string IdChauCay)
         {
             DbConnection conObject = DataBaseConnection.GetDatabaseConnection();
-            LoaiChauCay loaiChauCay = null;
+            ChiTietHoaDon cthd = null;
 
             try
             {
@@ -301,15 +412,18 @@ namespace QuanLyChauCayCanh.Business
 
                         if (rd.Read())
                         {
-                            loaiChauCay = new LoaiChauCay()
+                            cthd = new ChiTietHoaDon()
                             {
-                                Id = rd["idLoaichaucay"].ToString(),
-                                Ten = rd["tenLoaiChauCay"].ToString(),
+                                IdHoaDon = rd["idHoadon"].ToString(),
+                                IdChauCay = rd["idChaucay"].ToString(),
+                                GiaBan = rd["fgiaban"].ToString(),
+                                SoLuong = rd["fSoluong"].ToString(),
+                                KhuyenMai = rd["fKhuyenmai"].ToString(),
                             };
 
                         }
 
-                        return loaiChauCay;
+                        return cthd;
                     }
 
 
@@ -319,19 +433,18 @@ namespace QuanLyChauCayCanh.Business
             }
             catch (SqlException sqlexception)
             {
-                return loaiChauCay;
+                return cthd;
             }
             catch (Exception ex)
             {
-                return loaiChauCay;
+                return cthd;
             }
             finally
             {
                 conObject.Close();
             }
-            return loaiChauCay;
+            return cthd;
         }
-
 
         public static String TinhThanhTien(string SoLuong, string GiaBan, string KhuyenMai)
         {

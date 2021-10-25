@@ -24,10 +24,10 @@ namespace QuanLyChauCayCanh.Business
                     //Response.Write("Database Connection is Open");
                     using (var cmd = conObject.CreateCommand())
                     {
-                        cmd.CommandText = 
-                            "Select idHoadon, tbl_hoadon.id_NV, tenNV, tbl_hoadon.id_KH, tenKH, dNgaymua, db_QLBH.dbo.tbl_hoadon.dThoigiantao, db_QLBH.dbo.tbl_hoadon.dThoigiansua from db_QLBH.dbo.tbl_hoadon "
+                        cmd.CommandText =
+                            "Select idHoadon, tbl_hoadon.id_NV, tenNV, tbl_hoadon.id_KH, tenKH, dNgaymua, db_QLBH.dbo.tbl_hoadon.dThoigiantao, db_QLBH.dbo.tbl_hoadon.dThoigiansua, db_QLBH.dbo.tbl_hoadon.bDaIn from db_QLBH.dbo.tbl_hoadon "
 
-                             +"INNER JOIN db_QLBH.dbo.tbl_khachhang ON db_QLBH.dbo.tbl_hoadon.id_KH = db_QLBH.dbo.tbl_khachhang.id_KH "
+                             + "INNER JOIN db_QLBH.dbo.tbl_khachhang ON db_QLBH.dbo.tbl_hoadon.id_KH = db_QLBH.dbo.tbl_khachhang.id_KH "
 
                                 +"INNER JOIN db_QLBH.dbo.tbl_nhanvien ON db_QLBH.dbo.tbl_hoadon.id_NV = db_QLBH.dbo.tbl_nhanvien.id_NV; ";
                         var rd = cmd.ExecuteReader();
@@ -41,6 +41,7 @@ namespace QuanLyChauCayCanh.Business
                                 TenNhanVien = rd["tenNV"].ToString(),
                                 IdKhachHang = rd["id_KH"].ToString(),
                                 TenKhachHang = rd["tenKH"].ToString(),
+                                DaIn = rd["bDaIn"].ToString() == "1" ? true : false,
                                 NgayMua = CommonTask.StrToDate(rd["dNgaymua"].ToString()),
                                 ThoiGianTao = CommonTask.StrToDate(rd["dThoigiantao"].ToString()),
                                 ThoiGianSua = CommonTask.StrToDate(rd["dThoigiansua"].ToString()),
@@ -301,5 +302,45 @@ namespace QuanLyChauCayCanh.Business
             return hoaDon;
         }
 
+        public static void InHoaDon(string Id)
+        {
+            DbConnection conObject = DataBaseConnection.GetDatabaseConnection();
+            try
+            {
+                conObject.Open();
+                if (conObject.State == ConnectionState.Open)
+                {
+                    //Response.Write("Database Connection is Open");
+
+                    using (var cmd = conObject.CreateCommand())
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.CommandText = "InHoaDon";
+
+                        cmd.Parameters.Add(new SqlParameter("@Id", SqlDbType.Char, 3));
+                        cmd.Parameters["@Id"].Value = Id;
+                        cmd.ExecuteNonQuery();
+                        return;
+                    }
+
+
+
+                }
+
+            }
+            catch (SqlException sqlexception)
+            {
+                return;
+            }
+            catch (Exception ex)
+            {
+                return;
+            }
+            finally
+            {
+                conObject.Close();
+            }
+            return;
+        }
     }
 }

@@ -13,13 +13,19 @@ namespace QuanLyChauCayCanh
 {
     public partial class QLHoaDonForm : Form
     {
-        public static List<HoaDon> srcLstHoaDon;
-        public static List<ChiTietHoaDon> srcChiTietHoaDon;
+        public static List<HoaDon> srcLstHoaDon = new List<HoaDon>();
+        public static List<ChiTietHoaDon> srcChiTietHoaDon = new List<ChiTietHoaDon>();
+        
         public static ChiTietHoaDon AddingChiTietHoaDon;
+        
+        public static bool IsThemHoaDon = true;
         public static HoaDon SelectedHoaDon;
+
+        public static HoaDon AddingHoaDon;
         public static int total = 0;
         public static string PrefixMessageLabel = "Error: ";
-        Bitmap bmp;
+        public static DateTime DefaultTimeTo = DateTime.Now;
+        public static DateTime DefaultTimeFrom = DateTime.Now.Subtract(new System.TimeSpan(30, 0, 0, 0));
         public QLHoaDonForm()
         {
             InitializeComponent();
@@ -32,11 +38,14 @@ namespace QuanLyChauCayCanh
             cbKhachHang.DisplayMember = "Ten";
             cbKhachHang.ValueMember = "Id";
 
+            dBuyTimeFrom.Value = DefaultTimeFrom;
+            dBuyTimeTo.Value = DefaultTimeTo;
+            dCreateTimeFrom.Value = DefaultTimeFrom;
+            dCreateTimeTo.Value = DefaultTimeTo;
+
             srcLstHoaDon = QLHoaDon.GetList();
             ReLoadList();
             ThemMode();
-            btnSuaChau.Enabled = false;
-
         }
 
         public void clearInputs()
@@ -49,6 +58,10 @@ namespace QuanLyChauCayCanh
             {
                 txtMa.Text = CommonTask.NextId(srcLstHoaDon[srcLstHoaDon.Count - 1].Id);
             }
+            dBuyTimeFrom.Value = DefaultTimeFrom;
+            dBuyTimeTo.Value = DefaultTimeTo;
+            dCreateTimeFrom.Value = DefaultTimeFrom;
+            dCreateTimeTo.Value = DefaultTimeTo;
             cbKhachHang.Refresh();
         }
 
@@ -60,6 +73,9 @@ namespace QuanLyChauCayCanh
             btnXoaHD.Enabled = false;
             btnThemHD.Enabled = true;
             btnPrintHD.Enabled = false;
+            IsThemHoaDon = true;
+            btnSuaChau.Enabled = true;
+            lwCTHD.Items.Clear();
         }
         public void SuaMode()
         {
@@ -68,6 +84,15 @@ namespace QuanLyChauCayCanh
             btnHuyHD.Enabled = true;
             btnXoaHD.Enabled = true;
             btnPrintHD.Enabled = true;
+
+            if (SelectedHoaDon.DaIn)
+            {
+                btnLuuHD.Enabled = false;
+                btnXoaHD.Enabled = false;
+                btnSuaChau.Enabled = false;
+            }
+
+            IsThemHoaDon = false;
         }
 
         public HoaDon GetEditingLoaiChauCay()
@@ -161,14 +186,13 @@ namespace QuanLyChauCayCanh
             if (e.IsSelected)
             {
                 FillInfo(SelectedHoaDon);
-                SuaMode();
                 btnSuaChau.Enabled = true;
+                SuaMode();
             }
             else
             {
                 clearInputs();
                 ThemMode();
-                btnSuaChau.Enabled = false;
             }
         }
         public void FillInfo(HoaDon hoaDon)
@@ -253,27 +277,34 @@ namespace QuanLyChauCayCanh
             btnTimKiem_Click(sender, e);
             ThemMode();
 
-            MessageBox.Show("Xóa loại chậu cây thành công");
+            MessageBox.Show("Xóa hóa đơn thành công");
         }
         private void btnTimKiem_Click(object sender, EventArgs e)
         {
             ThemMode();
             string searchText = txtTimKiem.Text;
-            var filterList = srcLstHoaDon.Where(s => s.TenKhachHang.ToLower().Contains(searchText.ToLower())).ToList();
+            var filterList = srcLstHoaDon.Where(s => 
+                (s.TenKhachHang.ToLower().Contains(searchText.ToLower())
+                || s.TenNhanVien.ToLower().Contains(searchText.ToLower())
+                || s.Id.ToLower().Contains(searchText.ToLower()))
+                && (dCreateTimeFrom.Value <= s.ThoiGianTao && s.ThoiGianTao <= dCreateTimeTo.Value)
+                && (dBuyTimeFrom.Value <= s.NgayMua && s.NgayMua <= dBuyTimeTo.Value)
+                ).ToList();
             if (String.IsNullOrEmpty(searchText.Trim()))
             {
                 filterList = srcLstHoaDon;
             }
 
-            LoadList(filterList);
+            LoadListHD(filterList);
         }
 
         public void ReLoadList()
         {
-            LoadList(srcLstHoaDon);
+            LoadListHD(srcLstHoaDon);
+            LoadListCTHD(srcChiTietHoaDon);
         }
 
-        public void LoadList(List<HoaDon> lst)
+        public void LoadListHD(List<HoaDon> lst)
         {
             lwHoaDon.Items.Clear();
 
@@ -284,14 +315,36 @@ namespace QuanLyChauCayCanh
                 ListViewItem item = new ListViewItem(lcl.Id);
                 item.SubItems.Add(lcl.TenKhachHang);
                 item.SubItems.Add(lcl.TenNhanVien);
-                item.SubItems.Add(lcl.NgayMua.ToString());
+                item.SubItems.Add(lcl.NgayMua.ToString("dd/MM/yyyy"));
                 item.SubItems.Add(lcl.ThoiGianTao.ToString("dd/MM/yyyy"));
                 item.SubItems.Add(lcl.ThoiGianSua.ToString("dd/MM/yyyy"));
                 //item.SubItems.Add(nv.Sdt);
                 lwHoaDon.Items.Add(item);
             }
+            
 
         }
+        public void LoadListCTHD(List<ChiTietHoaDon> lst)
+        {
+            lwCTHD.Items.Clear();
+            total = 0;
+            foreach (var cthd in srcChiTietHoaDon)
+            {
+                ListViewItem item = new ListViewItem(cthd.IdChauCay);
+                item.SubItems.Add(cthd.TenChauCay);
+                item.SubItems.Add(cthd.SoLuong);
+                item.SubItems.Add(cthd.GiaBan);
+                item.SubItems.Add(cthd.KhuyenMai);
+                var thanhtien = QLChiTietHoaDon.TinhThanhTien(cthd.SoLuong, cthd.GiaBan, cthd.KhuyenMai);
+                item.SubItems.Add(thanhtien);
+                total += int.Parse(thanhtien);
+                //item.SubItems.Add(nv.Sdt);
+                lwCTHD.Items.Add(item);
+            }
+            lbTong.Text = total.ToString();
+
+        }
+
         private void btnHuy_Click(object sender, EventArgs e)
         {
             clearInputs();
@@ -301,6 +354,11 @@ namespace QuanLyChauCayCanh
         private void btnHuyTimKiem_Click(object sender, EventArgs e)
         {
             txtTimKiem.Text = String.Empty;
+            dBuyTimeFrom.Value = DefaultTimeTo;
+            dBuyTimeTo.Value = DefaultTimeTo;
+            dCreateTimeFrom.Value = DefaultTimeTo;
+            dCreateTimeTo.Value = DefaultTimeTo;
+            txtTimKiem.Text = "";
             ReLoadList();
         }
 
@@ -318,42 +376,51 @@ namespace QuanLyChauCayCanh
         private void btnSuaChau_Click(object sender, EventArgs e)
         {
             ChiTietHoaDonForm form = new ChiTietHoaDonForm();
-            form.hoaDonId = SelectedHoaDon.Id;
+            AddingHoaDon = GetEditingLoaiChauCay();
+            form.hoaDonId = AddingHoaDon.Id;
             form.FormClosed += ReloadAfterEditListCTHD;
             form.ShowDialog();
         }
         public void ReloadAfterEditListCTHD(object sender, EventArgs e)
         {
-            srcChiTietHoaDon = QLChiTietHoaDon.GetList(SelectedHoaDon.Id);
-            lwCTHD.Items.Clear();
-            total = 0;
-            foreach (var cthd in srcChiTietHoaDon)
+            if (ChiTietHoaDonForm.IsThemThanhCong)
             {
-                ListViewItem item = new ListViewItem(cthd.IdChauCay);
-                item.SubItems.Add(cthd.TenChauCay);
-                item.SubItems.Add(cthd.GiaBan);
-                item.SubItems.Add(cthd.SoLuong);
-                item.SubItems.Add(cthd.KhuyenMai);
-                var thanhtien = QLChiTietHoaDon.TinhThanhTien(cthd.SoLuong, cthd.GiaBan, cthd.KhuyenMai);
-                item.SubItems.Add(thanhtien);
-                total += int.Parse(thanhtien);
-                //item.SubItems.Add(nv.Sdt);
-                lwCTHD.Items.Add(item);
+                
+                if (IsThemHoaDon)
+                {
+                    MessageBox.Show("Thêm thành công");
+                    srcLstHoaDon = QLHoaDon.GetList();
+                    ReLoadList();
+                    srcChiTietHoaDon = QLChiTietHoaDon.GetList(AddingHoaDon.Id);
+                    LoadListCTHD(srcChiTietHoaDon);
+                }
+                else
+                {
+                    MessageBox.Show("Lưu thành công");
+                    srcChiTietHoaDon = QLChiTietHoaDon.GetList(SelectedHoaDon.Id);
+                    LoadListCTHD(srcChiTietHoaDon);
+                }
+
+                
             }
-            lbTong.Text = total.ToString();
+            else
+            {
+                //MessageBox.Show("Lỗi vui lòng thử lại!");
+            }
+            
         }
 
         private void btnPrintHD_Click(object sender, EventArgs e)
         {
             InHoaDonForm form = new InHoaDonForm();
+            QLHoaDon.InHoaDon(SelectedHoaDon.Id);
+            ThemMode();
             form.HoaDonId = SelectedHoaDon.Id;
             form.TenKhachHang = cbKhachHang.Text;
             form.ShowDialog();
-        }
+            var hoaDon = srcLstHoaDon.FirstOrDefault(hd => hd.Id == SelectedHoaDon.Id);
+            hoaDon.DaIn = true;
 
-        private void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
-        {
-            e.Graphics.DrawImage(bmp, 0, 0);
         }
 
         private void btnBackToMain_Click(object sender, EventArgs e)
@@ -362,5 +429,7 @@ namespace QuanLyChauCayCanh
             MainForm.mainform.NeedToClosed = false;
             this.Close();
         }
+
+
     }
 }

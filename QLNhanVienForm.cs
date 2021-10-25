@@ -16,6 +16,7 @@ namespace QuanLyChauCayCanh
     {
         public static List<NhanVien> srcLstNhanVien;
         public static DateTime DefaultTime = DateTime.Now;
+
         public static string PrefixMessageLabel = "Error: ";
         
         public QLNhanVienForm()
@@ -298,12 +299,23 @@ namespace QuanLyChauCayCanh
 
             var item = lwNhanVien.Items.Cast<ListViewItem>().FirstOrDefault(it => it.Text == selectNV.Id);
 
-            lwNhanVien.Items.Remove(item);
-            srcLstNhanVien.Remove(selectNV);
-            btnTimKiem_Click(sender, e);
-            ThemMode();
+            var confirmResult = MessageBox.Show("Bạn có chắc muốn xóa nhân viên " + selectNV.Ten + " ?",
+                                     "Xác nhận xóa !",
+                                     MessageBoxButtons.YesNo);
+            if (confirmResult == DialogResult.Yes)
+            {
+                lwNhanVien.Items.Remove(item);
+                srcLstNhanVien.Remove(selectNV);
+                btnTimKiem_Click(sender, e);
+                ThemMode();
 
-            MessageBox.Show("Xóa nhân viên thành công");
+                MessageBox.Show("Xóa nhân viên thành công !");
+            }
+            else
+            {
+            }
+
+            
 
         }
 
@@ -311,7 +323,12 @@ namespace QuanLyChauCayCanh
         {
             ThemMode();
             string searchText = txtTimKiem.Text;
-            var filterList = srcLstNhanVien.Where(s => s.Ten.ToLower().Contains(searchText.ToLower())).ToList();
+            var filterList = srcLstNhanVien.Where(
+                    s => 
+                        s.Ten.ToLower().Contains(searchText.ToLower())
+                        || s.Sdt.ToLower().Contains(searchText.ToLower())
+                        || s.Id.ToLower().Contains(searchText.ToLower())
+                    ).ToList();
             if (String.IsNullOrEmpty(searchText.Trim()))
             {
                 filterList = srcLstNhanVien;
@@ -339,6 +356,11 @@ namespace QuanLyChauCayCanh
             MainForm.mainform.Show();
             MainForm.mainform.NeedToClosed = false;
             this.Close();
+        }
+
+        private void txtSdt_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
         }
     }
 }
