@@ -345,12 +345,22 @@ namespace QuanLyChauCayCanh
 
             var item = lwChauCay.Items.Cast<ListViewItem>().FirstOrDefault(it => it.Text == selectCC.Id);
 
-            lwChauCay.Items.Remove(item);
-            srcLstChauCay.Remove(selectCC);
-            btnTimKiem_Click(sender, e);
-            ThemMode();
+            var confirmResult = MessageBox.Show("Bạn có chắc muốn xóa chậu cây" + selectCC.Ten + " ?",
+                                    "Xác nhận xóa !",
+                                    MessageBoxButtons.YesNo);
 
-            MessageBox.Show("Xóa chậu cây thành công");
+            if (confirmResult == DialogResult.Yes)
+            {
+                lwChauCay.Items.Remove(item);
+                srcLstChauCay.Remove(selectCC);
+                btnTimKiem_Click(sender, e);
+                ThemMode();
+
+                MessageBox.Show("Xóa chậu cây thành công");
+            }
+            else
+            {
+            }
         }
 
         private void btnTimKiem_Click(object sender, EventArgs e)

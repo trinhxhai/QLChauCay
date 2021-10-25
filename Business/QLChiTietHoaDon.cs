@@ -364,7 +364,7 @@ namespace QuanLyChauCayCanh.Business
 
                         var res = cmd.ExecuteNonQuery();
 
-                        int delta = chiTietHoaDon == null ? 0: int.Parse(ctHD.SoLuong);
+                        int delta = chiTietHoaDon == null ? 0 : int.Parse(ctHD.SoLuong);
                         int conLai = int.Parse(chauCay.SoLuong) + delta;
                         chauCay.SoLuong = conLai.ToString();
                         QLChauCay.UpdateSoLuongCay(chauCay);

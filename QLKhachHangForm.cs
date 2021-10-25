@@ -256,7 +256,6 @@ namespace QuanLyChauCayCanh
             QLKhachHang.Delete(selectLCL);
 
             var item = lwKhachHang.Items.Cast<ListViewItem>().FirstOrDefault(it => it.Text == selectLCL.Id);
-
             
 
             var confirmResult = MessageBox.Show("Bạn có chắc muốn xóa khách hàng " + selectLCL.Ten + " ?",

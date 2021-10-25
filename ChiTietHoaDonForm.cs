@@ -21,10 +21,11 @@ namespace QuanLyChauCayCanh
         public string hoaDonId;
         public int total = 0;
         public static List<ChiTietHoaDon> srcChiTietHoaDon;
+        public static List<ChiTietHoaDon> originCTHD;
         public static bool IsEditing = false;
         public static bool IsThemThanhCong = false;
 
-        public static List<String> deletedCTHDId = new List<string>();
+        public static List<ChiTietHoaDon> deletedCTHDId = new List<ChiTietHoaDon>(); // pending delete
 
         public ChiTietHoaDonForm()
         {
@@ -35,6 +36,7 @@ namespace QuanLyChauCayCanh
         {
             srcLstChauCay = QLChauCay.GetList();
             srcChiTietHoaDon = QLChiTietHoaDon.GetList(hoaDonId);
+            originCTHD = new List<ChiTietHoaDon>(srcChiTietHoaDon);
             LoadListCTHD(srcChiTietHoaDon);
             ReLoadList();
             clearInputs();
@@ -316,9 +318,8 @@ namespace QuanLyChauCayCanh
         private void btnXoaChau_Click(object sender, EventArgs e)
         {
             //QLChiTietHoaDon.Delete(new ChiTietHoaDon {IdChauCay = SelectedChauCay.Id , IdHoaDon = hoaDonId });
-            deletedCTHDId.Add(SelectedChauCay.Id);
+            deletedCTHDId.Add(SelectedCTHD);
             var lwitem = lwCTHD.Items.Cast<ListViewItem>().FirstOrDefault(it => it.Text == SelectedChauCay.Id);
-
             
             var selectedCTHD = srcChiTietHoaDon.FirstOrDefault(item => item.IdChauCay == SelectedChauCay.Id);
             total -= int.Parse(QLChiTietHoaDon.TinhThanhTien(selectedCTHD.SoLuong, selectedCTHD.GiaBan, selectedCTHD.KhuyenMai));
@@ -326,8 +327,6 @@ namespace QuanLyChauCayCanh
             lwCTHD.Items.Remove(lwitem);
             srcChiTietHoaDon.Remove(selectedCTHD);
             ThemMode();
-
-            
 
             MessageBox.Show("Xóa chi tiết hóa đơn thành công");
         }
@@ -368,20 +367,27 @@ namespace QuanLyChauCayCanh
             string CreateMsg ="";
             if(QLHoaDonForm.IsThemHoaDon)
                 (IsSuccess, CreateMsg) = QLHoaDon.Add(newHoaDon);
+
+
             foreach(var ct in srcChiTietHoaDon)
             {
-                QLChiTietHoaDon.AddOrEdit(ct);
-            }
-            foreach(var idChauCay in deletedCTHDId)
-            {
-                if(srcChiTietHoaDon.FirstOrDefault(cthd => cthd.IdChauCay == idChauCay) == null)
+                if(originCTHD.FirstOrDefault(cthd => cthd.IdChauCay == ct.IdChauCay)!=null) {
+                    QLChiTietHoaDon.Edit(ct);
+                }
+                else
                 {
-                    QLChiTietHoaDon.Delete(new ChiTietHoaDon { 
-                        IdChauCay = idChauCay, 
-                        IdHoaDon = newHoaDon.Id 
-                    });
+                    QLChiTietHoaDon.Add(ct);
                 }
             }
+
+            foreach (var ct in originCTHD)
+            {
+                if (srcChiTietHoaDon.FirstOrDefault(cthd => cthd.IdChauCay == ct.IdChauCay) == null)
+                {
+                    QLChiTietHoaDon.Delete(ct);
+                }
+            }
+            
             IsThemThanhCong = true;
             this.Close();
         }

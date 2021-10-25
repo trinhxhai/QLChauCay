@@ -204,12 +204,22 @@ namespace QuanLyChauCayCanh
 
             var item = lwLoaiChauCay.Items.Cast<ListViewItem>().FirstOrDefault(it => it.Text == selectLCL.Id);
 
-            lwLoaiChauCay.Items.Remove(item);
-            srcLstLoaiChauCay.Remove(selectLCL);
-            btnTimKiem_Click(sender, e);
-            ThemMode();
 
-            MessageBox.Show("Xóa loại chậu cây thành công");
+            var confirmResult = MessageBox.Show("Bạn có chắc muốn xóa loại chậu cây " + selectLCL.Ten + " ?",
+                                     "Xác nhận xóa !",
+                                     MessageBoxButtons.YesNo);
+            if (confirmResult == DialogResult.Yes)
+            {
+                lwLoaiChauCay.Items.Remove(item);
+                srcLstLoaiChauCay.Remove(selectLCL);
+                btnTimKiem_Click(sender, e);
+                ThemMode();
+
+                MessageBox.Show("Xóa loại chậu cây thành công");
+            }
+            else
+            {
+            }
         }
 
         private void btnTimKiem_Click(object sender, EventArgs e)

@@ -385,29 +385,31 @@ namespace QuanLyChauCayCanh
         {
             if (ChiTietHoaDonForm.IsThemThanhCong)
             {
-                
+
                 if (IsThemHoaDon)
                 {
                     MessageBox.Show("Thêm thành công");
-                    srcLstHoaDon = QLHoaDon.GetList();
-                    ReLoadList();
-                    srcChiTietHoaDon = QLChiTietHoaDon.GetList(AddingHoaDon.Id);
-                    LoadListCTHD(srcChiTietHoaDon);
                 }
                 else
                 {
                     MessageBox.Show("Lưu thành công");
-                    srcChiTietHoaDon = QLChiTietHoaDon.GetList(SelectedHoaDon.Id);
-                    LoadListCTHD(srcChiTietHoaDon);
                 }
 
-                
+                srcLstHoaDon = QLHoaDon.GetList();
+                ReLoadList();
+                //srcChiTietHoaDon = QLChiTietHoaDon.GetList(AddingHoaDon.Id);
+                //LoadListCTHD(srcChiTietHoaDon);
+
+                srcChiTietHoaDon = new List<ChiTietHoaDon>();
+                LoadListCTHD(srcChiTietHoaDon);
+                ThemMode();
+
             }
             else
             {
                 //MessageBox.Show("Lỗi vui lòng thử lại!");
             }
-            
+
         }
 
         private void btnPrintHD_Click(object sender, EventArgs e)
