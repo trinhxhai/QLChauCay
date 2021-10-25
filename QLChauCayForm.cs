@@ -345,7 +345,7 @@ namespace QuanLyChauCayCanh
 
             var item = lwChauCay.Items.Cast<ListViewItem>().FirstOrDefault(it => it.Text == selectCC.Id);
 
-            var confirmResult = MessageBox.Show("Bạn có chắc muốn xóa chậu cây" + selectCC.Ten + " ?",
+            var confirmResult = MessageBox.Show("Bạn có chắc muốn xóa chậu cây " + selectCC.Ten + " ?",
                                     "Xác nhận xóa !",
                                     MessageBoxButtons.YesNo);
 
