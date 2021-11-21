@@ -173,7 +173,6 @@ namespace QuanLyChauCayCanh.Business
             
             return res;
         }
-        
         public static (bool,string) Add(NhanVien nv)
         {
             DbConnection conObject = DataBaseConnection.GetDatabaseConnection();

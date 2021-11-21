@@ -15,15 +15,13 @@ namespace QuanLyChauCayCanh
     {
         public static List<HoaDon> srcLstHoaDon = new List<HoaDon>();
         public static List<ChiTietHoaDon> srcChiTietHoaDon = new List<ChiTietHoaDon>();
-        
-        public static ChiTietHoaDon AddingChiTietHoaDon;
-        
+        public static string PrefixMessageLabel = "Error: ";
+
         public static bool IsThemHoaDon = true;
         public static HoaDon SelectedHoaDon;
-
         public static HoaDon AddingHoaDon;
+
         public static int total = 0;
-        public static string PrefixMessageLabel = "Error: ";
         public static DateTime DefaultTimeTo = DateTime.Now;
         public static DateTime DefaultTimeFrom = DateTime.Now.Subtract(new System.TimeSpan(30, 0, 0, 0));
         public QLHoaDonForm()
@@ -47,7 +45,6 @@ namespace QuanLyChauCayCanh
             ReLoadList();
             ThemMode();
         }
-
         public void clearInputs()
         {
             if (srcLstHoaDon.Count == 0)
@@ -64,7 +61,6 @@ namespace QuanLyChauCayCanh
             dCreateTimeTo.Value = DefaultTimeTo;
             cbKhachHang.Refresh();
         }
-
         public void ThemMode()
         {
             clearInputs();
@@ -217,8 +213,6 @@ namespace QuanLyChauCayCanh
             }
             lbTong.Text = total.ToString();
         }
-        
-
         private void btnLuuHD_Click(object sender, EventArgs e)
         {
             var hoaDon = GetEditingLoaiChauCay();
@@ -369,10 +363,8 @@ namespace QuanLyChauCayCanh
                 btnTimKiem_Click(sender, e);
             }
         }
-
-
+        
         // Chi tiết hóa đơn
-
         private void btnSuaChau_Click(object sender, EventArgs e)
         {
             ChiTietHoaDonForm form = new ChiTietHoaDonForm();
@@ -411,7 +403,6 @@ namespace QuanLyChauCayCanh
             }
 
         }
-
         private void btnPrintHD_Click(object sender, EventArgs e)
         {
             InHoaDonForm form = new InHoaDonForm();
@@ -424,14 +415,11 @@ namespace QuanLyChauCayCanh
             hoaDon.DaIn = true;
 
         }
-
         private void btnBackToMain_Click(object sender, EventArgs e)
         {
             MainForm.mainform.Show();
             MainForm.mainform.NeedToClosed = false;
             this.Close();
         }
-
-
     }
 }

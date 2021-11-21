@@ -25,8 +25,6 @@ namespace QuanLyChauCayCanh
         public static bool IsEditing = false;
         public static bool IsThemThanhCong = false;
 
-        public static List<ChiTietHoaDon> deletedCTHDId = new List<ChiTietHoaDon>(); // pending delete
-
         public ChiTietHoaDonForm()
         {
             InitializeComponent();
@@ -318,7 +316,7 @@ namespace QuanLyChauCayCanh
         private void btnXoaChau_Click(object sender, EventArgs e)
         {
             //QLChiTietHoaDon.Delete(new ChiTietHoaDon {IdChauCay = SelectedChauCay.Id , IdHoaDon = hoaDonId });
-            deletedCTHDId.Add(SelectedCTHD);
+
             var lwitem = lwCTHD.Items.Cast<ListViewItem>().FirstOrDefault(it => it.Text == SelectedChauCay.Id);
             
             var selectedCTHD = srcChiTietHoaDon.FirstOrDefault(item => item.IdChauCay == SelectedChauCay.Id);
@@ -368,10 +366,9 @@ namespace QuanLyChauCayCanh
             if(QLHoaDonForm.IsThemHoaDon)
                 (IsSuccess, CreateMsg) = QLHoaDon.Add(newHoaDon);
 
-
             foreach(var ct in srcChiTietHoaDon)
             {
-                if(originCTHD.FirstOrDefault(cthd => cthd.IdChauCay == ct.IdChauCay)!=null) {
+                if(originCTHD.FirstOrDefault(cthd => cthd.IdChauCay == ct.IdChauCay) != null) {
                     QLChiTietHoaDon.Edit(ct);
                 }
                 else

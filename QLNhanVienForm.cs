@@ -58,6 +58,7 @@ namespace QuanLyChauCayCanh
 
         }
 
+        // Lấy thông tin đang chỉnh sửa tạo thành một thực thể Nhân Viên
         public NhanVien GetEditingNhanVien()
         {
             return new NhanVien()
@@ -73,7 +74,7 @@ namespace QuanLyChauCayCanh
             };
         }
 
-
+        // Kiểm tra xem Các trường thông tin đăng nhập đã đúng hay chưa, nếu sai thì trả về tin nhắn vì sao sai.
         public (bool,string) validateInputs(NhanVien nv)
         {
 
@@ -276,13 +277,11 @@ namespace QuanLyChauCayCanh
                 MessageBox.Show("Sửa nhân viên thành công");
 
                 ThemMode();
-
             }
             else
             {
                 MessageBox.Show(EditMsg);
             }
-
             
         }
 
@@ -302,6 +301,7 @@ namespace QuanLyChauCayCanh
             var confirmResult = MessageBox.Show("Bạn có chắc muốn xóa nhân viên " + selectNV.Ten + " ?",
                                      "Xác nhận xóa !",
                                      MessageBoxButtons.YesNo);
+
             if (confirmResult == DialogResult.Yes)
             {
                 lwNhanVien.Items.Remove(item);
@@ -314,11 +314,7 @@ namespace QuanLyChauCayCanh
             else
             {
             }
-
-            
-
         }
-
         private void btnTimKiem_Click(object sender, EventArgs e)
         {
             ThemMode();

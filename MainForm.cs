@@ -42,13 +42,20 @@ namespace QuanLyChauCayCanh
             
         }
 
+        private void btnDangXuat_Click(object sender, EventArgs e)
+        {
+            LoginForm.LoginUserId = "";
+            lbLoginUser.Hide();
+            btnOpenDangNhap.Show();
+            btnDangXuat.Hide();
+        }
         public void ShowSuccessMsg(object sender, EventArgs e)
         {
             if (!String.IsNullOrEmpty(LoginForm.LoginUserId))
             {
                 var nv = QLNhanVien.GetById(LoginForm.LoginUserId);
 
-                if(nv != null)
+                if (nv != null)
                 {
                     MessageBox.Show("Đăng nhập thành công");
                     btnDangXuat.Show();
@@ -63,21 +70,12 @@ namespace QuanLyChauCayCanh
             btnOpenDangNhap.Show();
             btnDangXuat.Hide();
         }
-
         public void CloseMain(object sender, EventArgs e)
         {
             if (NeedToClosed)
             {
                 this.Close();
             }
-        }
-
-        private void btnDangXuat_Click(object sender, EventArgs e)
-        {
-            LoginForm.LoginUserId = "";
-            lbLoginUser.Hide();
-            btnOpenDangNhap.Show();
-            btnDangXuat.Hide();
         }
 
         private void btnQLNhanVien_Click(object sender, EventArgs e)
