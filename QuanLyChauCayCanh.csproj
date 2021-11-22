@@ -98,6 +98,12 @@
     <Compile Include="Models\KhachHang.cs" />
     <Compile Include="Models\LoaiChauCay.cs" />
     <Compile Include="Models\NhanVien.cs" />
+    <Compile Include="PrintReportForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PrintReportForm.Designer.cs">
+      <DependentUpon>PrintReportForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QLChauCayForm.cs">
@@ -142,6 +148,23 @@
       <DependentUpon>rptHoaDon.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="rpt\rptChauCayBanDuoc.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptChauCayBanDuoc.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="rpt\rptKhachHangMua.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptKhachHangMua.rpt</DependentUpon>
+    </Compile>
+    <Compile Include="rpt\rptLoaiChauCayBanDuoc.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptLoaiChauCayBanDuoc.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <EmbeddedResource Include="BaoCaoThongKeForm.resx">
       <DependentUpon>BaoCaoThongKeForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -156,6 +179,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PrintReportForm.resx">
+      <DependentUpon>PrintReportForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -184,6 +210,18 @@
     <EmbeddedResource Include="rptHoaDon.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>rptHoaDon.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="rpt\rptChauCayBanDuoc.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptChauCayBanDuoc.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="rpt\rptKhachHangMua.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptKhachHangMua.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="rpt\rptLoaiChauCayBanDuoc.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptLoaiChauCayBanDuoc.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

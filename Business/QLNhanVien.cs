@@ -218,11 +218,11 @@ namespace QuanLyChauCayCanh.Business
 
                         var res = cmd.ExecuteScalar().ToString();
 
-                        bool IsSuccess = res.Trim() != "0" && res.Trim() != "-1";
+                        bool IsSuccess = res.Trim() != "0" && res.Trim() != "-1" && res.Trim() != "-2";
                         string CreateMsg = "";
                         if (!IsSuccess)
                         {
-                            CreateMsg = res == "0" ? "Mã đã tồn tại" : "Tên tài khoản đã tồn tại";
+                            CreateMsg = res == "0" ? "Mã đã tồn tại" : (res == "-1" ? "Tên tài khoản đã tồn tại" : "Đã tồn tại tên nhân viên, thêm vào hãy vào tên các kí tự để phân biệt.");
                             return (IsSuccess, CreateMsg);
                         }
 
@@ -292,14 +292,14 @@ namespace QuanLyChauCayCanh.Business
 
                         var res = cmd.ExecuteScalar().ToString();
 
-                        bool IsSuccess = res != "0" && res != "1";
+                        bool IsSuccess = res != "0" && res != "1" && res != "-2";
                         string CreateMsg = "";
                         if (!IsSuccess)
                         {
-                            CreateMsg = res == "0" ? "Mã không tồn tại" : "Tên tài khoản đã tồn tại";
+                            CreateMsg = res == "0" ? "Mã không tồn tại" : (res == "-1" ? "Tên tài khoản đã tồn tại" : "Đã tồn tại tên nhân viên, thêm vào hãy vào tên các kí tự để phân biệt.");
                         }
 
-                        return (IsSuccess, res);
+                        return (IsSuccess, CreateMsg);
                     }
 
                 }

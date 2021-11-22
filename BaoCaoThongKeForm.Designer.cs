@@ -68,6 +68,7 @@ namespace QuanLyChauCayCanh
             this.columnHeader10 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader11 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.btnBackToMain = new System.Windows.Forms.Button();
+            this.btnPrintStatic = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // dpFrom
@@ -392,11 +393,23 @@ namespace QuanLyChauCayCanh
             this.btnBackToMain.UseVisualStyleBackColor = true;
             this.btnBackToMain.Click += new System.EventHandler(this.btnBackToMain_Click);
             // 
+            // btnPrintStatic
+            // 
+            this.btnPrintStatic.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.btnPrintStatic.Location = new System.Drawing.Point(67, 608);
+            this.btnPrintStatic.Name = "btnPrintStatic";
+            this.btnPrintStatic.Size = new System.Drawing.Size(170, 35);
+            this.btnPrintStatic.TabIndex = 53;
+            this.btnPrintStatic.Text = "In báo cáo";
+            this.btnPrintStatic.UseVisualStyleBackColor = true;
+            this.btnPrintStatic.Click += new System.EventHandler(this.btnPrintStatic_Click);
+            // 
             // BaoCaoThongKeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1384, 761);
+            this.Controls.Add(this.btnPrintStatic);
             this.Controls.Add(this.btnBackToMain);
             this.Controls.Add(this.lwNhanVien);
             this.Controls.Add(this.lwKhachHang);
@@ -465,5 +478,6 @@ namespace QuanLyChauCayCanh
         private System.Windows.Forms.ColumnHeader columnHeader10;
         private System.Windows.Forms.ColumnHeader columnHeader11;
         private System.Windows.Forms.Button btnBackToMain;
+        private System.Windows.Forms.Button btnPrintStatic;
     }
 }

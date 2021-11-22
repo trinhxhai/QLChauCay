@@ -17,8 +17,8 @@ namespace QuanLyChauCayCanh
     {
         // General
 
-        public string currentTab = "ChauCay";
-
+        public static string currentTab = "ChauCay";
+        public static object currentList = "";
         public BaoCaoThongKeForm()
         {
             InitializeComponent();
@@ -60,6 +60,8 @@ namespace QuanLyChauCayCanh
             lbTitle.Text = "Báo cáo thống kê theo Chậu cây";
             List<BCTK_ChauCay> srcChauCay = BaoCaoThongKe.GetBCTKChauCay(dpFrom.Value, dpTo.Value);
             if (srcChauCay == null) return;
+            currentList = srcChauCay;
+
             int total = 0;
             lwChauCay.Items.Clear();
             foreach(var data in srcChauCay)
@@ -75,7 +77,6 @@ namespace QuanLyChauCayCanh
             lbTongTien.Text = total.ToString();
 
         }
-
         public void LoadBCTKLoaiChauCay()
         {
             currentTab = "LoaiChauCay";
@@ -87,6 +88,7 @@ namespace QuanLyChauCayCanh
             lbTitle.Text = "Báo cáo thống kê theo Loại chậu cây";
             List<BCTK_LoaiChauCay> srcLoaiChauCay = BaoCaoThongKe.GetBCTKLoaiChauCay(dpFrom.Value, dpTo.Value);
             if (srcLoaiChauCay == null) return;
+            currentList = srcLoaiChauCay;
             int total = 0;
             lwLoaiChauCay.Items.Clear();
             foreach (var data in srcLoaiChauCay)
@@ -99,10 +101,10 @@ namespace QuanLyChauCayCanh
                 total += data.TongThanhTien;
             }
 
+            
             lbTongTien.Text = total.ToString();
 
         }
-
         public void LoadBCTKKhachHang()
         {
             currentTab = "KhachHang";
@@ -114,6 +116,7 @@ namespace QuanLyChauCayCanh
             lbTitle.Text = "Báo cáo thống kê theo Khách hàng";
             List<BCTK_KhachHang> srcKhachHang = BaoCaoThongKe.GetBCTKKhachHang(dpFrom.Value, dpTo.Value);
             if (srcKhachHang == null) return;
+            currentList = srcKhachHang;
             int total = 0;
             lwKhachHang.Items.Clear();
             foreach (var data in srcKhachHang)
@@ -143,6 +146,7 @@ namespace QuanLyChauCayCanh
             lbTitle.Text = "Báo cáo thống kê theo Nhân viên";
             List<BCTK_NhanVien> srcNhanVien = BaoCaoThongKe.GetBCTKNhanVien(dpFrom.Value, dpTo.Value);
             if (srcNhanVien == null) return;
+            currentList = srcNhanVien;
             int total = 0;
             lwNhanVien.Items.Clear();
             foreach (var data in srcNhanVien)
@@ -181,6 +185,7 @@ namespace QuanLyChauCayCanh
             LoadBCTKNhanVien();
         }
 
+
         private void dpTo_ValueChanged(object sender, EventArgs e)
         {
             if(dpFrom.Value > dpTo.Value)
@@ -203,11 +208,20 @@ namespace QuanLyChauCayCanh
             Reload();
         }
 
+
         private void btnBackToMain_Click(object sender, EventArgs e)
         {
             MainForm.mainform.Show();
             MainForm.mainform.NeedToClosed = false;
             this.Close();
+        }
+
+        private void btnPrintStatic_Click(object sender, EventArgs e)
+        {
+            using (PrintReportForm prf = new PrintReportForm(currentTab, currentList, dpFrom.Value, dpTo.Value))
+            {
+                prf.ShowDialog();
+            }
         }
     }
 }

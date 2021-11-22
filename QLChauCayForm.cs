@@ -103,7 +103,6 @@ namespace QuanLyChauCayCanh
 
             SetDefaultImage();
         }
-
         public void SetDefaultImage()
         {
             var appDataPath = GetAppDataPath();
@@ -111,15 +110,12 @@ namespace QuanLyChauCayCanh
             LoadPic(path);
             currentImgBytes = new byte[] { };
         }
-
         public static string GetAppDataPath()
         {
             string[] s = { "\\bin" };
             string path = Application.StartupPath.Split(s, StringSplitOptions.None)[0] + "\\AppData";
             return path;
         }
-
-
         public void SetErrorMessage(string msg)
         {
             lbMessage.Text = PrefixMessageLabel + msg;
@@ -128,7 +124,6 @@ namespace QuanLyChauCayCanh
         {
             lbMessage.Text = "";
         }
-
         public void LoadList(List<NhanVien> lst)
         {
             lwChauCay.Items.Clear();
@@ -150,7 +145,6 @@ namespace QuanLyChauCayCanh
             }
 
         }
-
         public ChauCay GetEditingChauCay()
         {
             return new ChauCay()

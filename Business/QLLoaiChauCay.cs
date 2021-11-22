@@ -103,11 +103,11 @@ namespace QuanLyChauCayCanh.Business
 
                         var res = cmd.ExecuteScalar().ToString();
 
-                        bool IsSuccess = res != "0";
+                        bool IsSuccess = res != "0" && res != "-1";
                         string CreateMsg = "";
                         if (!IsSuccess)
                         {
-                            CreateMsg = "Mã đã tồn tại" ;
+                            CreateMsg = res == "0" ? "Mã đã tồn tại"  : "Tên đã tồn tại";
                         }
 
                         return (IsSuccess, CreateMsg);
@@ -159,11 +159,12 @@ namespace QuanLyChauCayCanh.Business
 
                         var res = cmd.ExecuteScalar().ToString();
 
-                        bool IsSuccess = res != "0" ;
+
+                        bool IsSuccess = res != "0" && res != "-1";
                         string CreateMsg = "";
                         if (!IsSuccess)
                         {
-                            CreateMsg = "Mã không tồn tại" ;
+                            CreateMsg = res == "0" ? "Mã không tồn tại" : "Tên đã tồn tại";
                         }
 
                         return (IsSuccess, CreateMsg);

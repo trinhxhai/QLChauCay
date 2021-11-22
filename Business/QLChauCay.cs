@@ -259,14 +259,14 @@ namespace QuanLyChauCayCanh.Business
 
                         var res = cmd.ExecuteScalar().ToString();
 
-                        bool IsSuccess = res != "0";
+                        bool IsSuccess = res != "0" && res != "-1" ;
                         string CreateMsg = "";
                         if (!IsSuccess)
                         {
-                            CreateMsg = res == "0" ? "Mã đã tồn tại" : "Tên tài khoản đã tồn tại";
+                            CreateMsg = res == "0" ? "Mã đã tồn tại" : "Tên chậu cây đã tồn tại";
                         }
 
-                        return (IsSuccess, res);
+                        return (IsSuccess, CreateMsg);
                     }
 
                 }
@@ -346,10 +346,10 @@ namespace QuanLyChauCayCanh.Business
                         string CreateMsg = "";
                         if (!IsSuccess)
                         {
-                            CreateMsg = res == "0" ? "Mã không tồn tại" : "Tên tài khoản đã tồn tại";
+                            CreateMsg = res == "0" ? "Mã không tồn tại" : "Tên chậu cây đã tồn tại";
                         }
 
-                        return (IsSuccess, res);
+                        return (IsSuccess, CreateMsg);
                     }
 
                 }
