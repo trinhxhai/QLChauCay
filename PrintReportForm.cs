@@ -17,13 +17,15 @@ namespace QuanLyChauCayCanh
         public object list_data;
         public DateTime dFrom;
         public DateTime dTo;
-        public PrintReportForm(string type, object list_data, DateTime dFrom, DateTime dTo)
+        public int TongThanhTien;
+        public PrintReportForm(string type, object list_data, DateTime dFrom, DateTime dTo, int TongThanhTien)
         {
             InitializeComponent();
             this.type = type;
             this.list_data = list_data;
             this.dFrom = dFrom;
             this.dTo = dTo;
+            this.TongThanhTien = TongThanhTien;
         }
 
         private void PrintReportForm_Load(object sender, EventArgs e)
@@ -38,6 +40,8 @@ namespace QuanLyChauCayCanh
                     rptChauCayBanDuoc.SetParameterValue("dFrom", dFrom.ToString("dd/MM/yyyy"));
                     rptChauCayBanDuoc.SetParameterValue("dTo", dTo.ToString("dd/MM/yyyy"));
                     rptChauCayBanDuoc.SetParameterValue("printDate", DateTime.Now.ToString("dd/MM/yyyy"));
+                    rptChauCayBanDuoc.SetParameterValue("TongThanhTien", TongThanhTien.ToString());
+
                     crystalReportStaticViewer.ReportSource = rptChauCayBanDuoc;
                     break;
 
@@ -49,15 +53,32 @@ namespace QuanLyChauCayCanh
                     rptLoaiChauCayBanDuoc.SetParameterValue("dFrom", dFrom.ToString("dd/MM/yyyy"));
                     rptLoaiChauCayBanDuoc.SetParameterValue("dTo", dTo.ToString("dd/MM/yyyy"));
                     rptLoaiChauCayBanDuoc.SetParameterValue("printDate", DateTime.Now.ToString("dd/MM/yyyy"));
+                    rptLoaiChauCayBanDuoc.SetParameterValue("TongThanhTien", TongThanhTien.ToString());
                     crystalReportStaticViewer.ReportSource = rptLoaiChauCayBanDuoc;
                     break;
 
                 case "KhachHang":
-
+                    var list3 = (List<BCTK_KhachHang>)this.list_data;
+                    rptKhachHangMua.SetDataSource(list3);
+                    rptKhachHangMua.SetParameterValue("NVId", ApplicationState.loginUser.Id);
+                    rptKhachHangMua.SetParameterValue("NVTen", ApplicationState.loginUser.Ten);
+                    rptKhachHangMua.SetParameterValue("dFrom", dFrom.ToString("dd/MM/yyyy"));
+                    rptKhachHangMua.SetParameterValue("dTo", dTo.ToString("dd/MM/yyyy"));
+                    rptKhachHangMua.SetParameterValue("printDate", DateTime.Now.ToString("dd/MM/yyyy"));
+                    rptKhachHangMua.SetParameterValue("TongThanhTien", TongThanhTien.ToString());
+                    crystalReportStaticViewer.ReportSource = rptKhachHangMua;
                     break;
 
                 case "NhanVien":
-
+                    var list4 = (List<BCTK_NhanVien>)this.list_data;
+                    rptNhanVienBan.SetDataSource(list4);
+                    rptNhanVienBan.SetParameterValue("NVId", ApplicationState.loginUser.Id);
+                    rptNhanVienBan.SetParameterValue("NVTen", ApplicationState.loginUser.Ten);
+                    rptNhanVienBan.SetParameterValue("dFrom", dFrom.ToString("dd/MM/yyyy"));
+                    rptNhanVienBan.SetParameterValue("dTo", dTo.ToString("dd/MM/yyyy"));
+                    rptNhanVienBan.SetParameterValue("printDate", DateTime.Now.ToString("dd/MM/yyyy"));
+                    rptNhanVienBan.SetParameterValue("TongThanhTien", TongThanhTien.ToString());
+                    crystalReportStaticViewer.ReportSource = rptNhanVienBan;
                     break;
             }
             crystalReportStaticViewer.Refresh();

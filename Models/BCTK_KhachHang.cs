@@ -11,6 +11,11 @@ namespace QuanLyChauCayCanh.Models
         public string Id { get; set; }
         public string Ten { get; set; }
         public DateTime NgaySinh { get; set; }
+        public string strNgaySinh {
+                get {
+                    return NgaySinh.ToString("dd/MM/yyy");
+                }
+        }
         public string Sdt { get; set; }
         public int SoLanMua { get; set; }
         public int SoLuong { get; set; }

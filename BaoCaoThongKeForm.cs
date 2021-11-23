@@ -19,6 +19,7 @@ namespace QuanLyChauCayCanh
 
         public static string currentTab = "ChauCay";
         public static object currentList = "";
+        public static int currentTotal = 0;
         public BaoCaoThongKeForm()
         {
             InitializeComponent();
@@ -73,7 +74,7 @@ namespace QuanLyChauCayCanh
                 lwChauCay.Items.Add(item);
                 total += data.TongThanhTien;
             }
-
+            currentTotal = total;
             lbTongTien.Text = total.ToString();
 
         }
@@ -101,7 +102,7 @@ namespace QuanLyChauCayCanh
                 total += data.TongThanhTien;
             }
 
-            
+            currentTotal = total;
             lbTongTien.Text = total.ToString();
 
         }
@@ -131,7 +132,7 @@ namespace QuanLyChauCayCanh
                 lwKhachHang.Items.Add(item);
                 total += data.TongThanhTien;
             }
-
+            currentTotal = total;
             lbTongTien.Text = total.ToString();
 
         }
@@ -160,7 +161,7 @@ namespace QuanLyChauCayCanh
                 lwNhanVien.Items.Add(item);
                 total += data.TongThanhTien;
             }
-
+            currentTotal = total;
             lbTongTien.Text = total.ToString();
 
         }
@@ -218,7 +219,7 @@ namespace QuanLyChauCayCanh
 
         private void btnPrintStatic_Click(object sender, EventArgs e)
         {
-            using (PrintReportForm prf = new PrintReportForm(currentTab, currentList, dpFrom.Value, dpTo.Value))
+            using (PrintReportForm prf = new PrintReportForm(currentTab, currentList, dpFrom.Value, dpTo.Value, currentTotal))
             {
                 prf.ShowDialog();
             }

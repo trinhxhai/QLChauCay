@@ -32,6 +32,8 @@ namespace QuanLyChauCayCanh
             this.crystalReportStaticViewer = new CrystalDecisions.Windows.Forms.CrystalReportViewer();
             this.rptChauCayBanDuoc = new QuanLyChauCayCanh.rpt.rptChauCayBanDuoc();
             this.rptLoaiChauCayBanDuoc = new QuanLyChauCayCanh.rpt.rptLoaiChauCayBanDuoc();
+            this.rptKhachHangMua = new QuanLyChauCayCanh.rpt.rptKhachHangMua();
+            this.rptNhanVienBan = new QuanLyChauCayCanh.rpt.rptNhanVienBan();
             this.SuspendLayout();
             // 
             // crystalReportStaticViewer
@@ -63,5 +65,7 @@ namespace QuanLyChauCayCanh
         private CrystalDecisions.Windows.Forms.CrystalReportViewer crystalReportStaticViewer;
         private rpt.rptChauCayBanDuoc rptChauCayBanDuoc;
         private rpt.rptLoaiChauCayBanDuoc rptLoaiChauCayBanDuoc;
+        private rpt.rptKhachHangMua rptKhachHangMua;
+        private rpt.rptNhanVienBan rptNhanVienBan;
     }
 }
