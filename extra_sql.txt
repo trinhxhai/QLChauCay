@@ -1,0 +1,195 @@
+USE db_QLBH
+go
+
+alter PROCEDURE ThemLoaiChauCay
+-- Trả về Id nếu thêm thành công, ngược lại trả về '0'
+-- 0 : Trùng Id
+-- 1 : Trùng tên
+	@Id char(3) ,@Ten nvarchar(30)
+AS
+if exists (select idLoaichaucay from db_QLBH.dbo.tbl_loaichaucay where idLoaichaucay = @Id)
+	begin
+		select '0';
+	end
+else
+	begin
+		if exists (select idLoaichaucay from db_QLBH.dbo.tbl_loaichaucay where tenLoaichaucay = @Ten)
+			begin
+				select '-1';
+			end
+		else
+			begin
+				SET NOCOUNT ON;
+				INSERT INTO db_QLBH.dbo.tbl_loaichaucay (idLoaichaucay,tenLoaichaucay,dThoigiantao,dThoigiansua)
+				Output inserted.idLoaichaucay
+				VALUES(@Id,@Ten,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP)
+			end
+		
+	end
+
+go
+
+
+alter PROCEDURE SuaLoaiChauCay
+-- Trả về Id nếu thêm thành công, ngược lại trả về '0'
+	@Id char(3) ,@Ten nvarchar(30)
+AS
+if exists (select idLoaichaucay from db_QLBH.dbo.tbl_loaichaucay where idLoaichaucay = @Id)
+	Begin
+		if exists (select idLoaichaucay from db_QLBH.dbo.tbl_loaichaucay where idLoaichaucay != @Id and tenLoaichaucay = @Ten)
+			begin
+				select '-1';
+			end
+		else
+			begin
+				SET NOCOUNT ON;
+				UPDATE db_QLBH.dbo.tbl_loaichaucay 
+				set tenLoaiChauCay = @Ten, dThoigiansua = CURRENT_TIMESTAMP
+				OUTPUT INSERTED.idLoaichaucay
+				where idLoaichaucay = @Id
+			end
+		
+	End
+else
+	begin
+		select '0';
+	end
+
+go
+
+
+create PROCEDURE ThemChauCay
+-- Trả về Id nếu thêm thành công, ngược lại trả về '0'
+	@Id char(3) ,@Ten nvarchar(30), @ChieuDai char(9), @ChieuRong char(9), @ChieuCao char(9), @HinhAnh varbinary(max),
+	@MauSac nvarchar(15), @MoTa nvarchar(100), @SoLuong char(3), @GiaBan char(9),
+	@IdLoaiChauCay char(3)
+AS
+if exists (select idChaucay from db_QLBH.dbo.tbl_chaucay where idChaucay = @Id)
+	begin
+		select '0';
+	end
+else
+	begin
+		if exists (select idChaucay from db_QLBH.dbo.tbl_chaucay where tenChauCay = @Ten)
+			begin
+				select '-1';
+			end
+		else
+			begin
+				SET NOCOUNT ON;
+				INSERT INTO db_QLBH.dbo.tbl_chaucay (idChaucay, tenChaucay, schieudai, schieurong, schieucao, hinhanh, smausac, mota, fSoluong, fGiaban, idLoaichaucay,dThoigiantao,dThoigiansua)
+				Output inserted.idChaucay
+				VALUES(@Id, @Ten, @ChieuDai, @ChieuRong, @ChieuCao, @HinhAnh, @MauSac, @Mota, @SoLuong, @GiaBan, @IdLoaiChauCay, CURRENT_TIMESTAMP,CURRENT_TIMESTAMP)
+			end
+		
+	end
+go
+
+
+create PROCEDURE SuaChauCay
+-- Trả về Id nếu thêm thành công, ngược lại trả về '0'
+	@Id char(3) ,@Ten nvarchar(30), @ChieuDai char(9), @ChieuRong char(9), @ChieuCao char(9), @HinhAnh varbinary(max), 
+	@MauSac nvarchar(15), @MoTa nvarchar(100), @SoLuong char(3), @GiaBan char(9),
+	@IdLoaiChauCay char(3)
+AS
+if exists (select idChaucay from db_QLBH.dbo.tbl_chaucay where idChaucay = @Id)
+	if exists (select idChaucay from db_QLBH.dbo.tbl_chaucay where idChaucay != @Id and tenChauCay = @Ten)
+		begin
+			select '-1';
+		end
+	else
+		Begin
+		
+			SET NOCOUNT ON;
+			UPDATE db_QLBH.dbo.tbl_chaucay 
+			set 
+				tenChaucay = @Ten, schieudai = @ChieuDai, schieurong = @ChieuRong, schieucao = @ChieuCao, hinhanh = @HinhAnh,
+				smausac = @MauSac, mota = @MoTa, fSoluong=  @SoLuong, fGiaban = @GiaBan, idLoaichaucay = @IdLoaiChauCay,
+				dThoigiansua = CURRENT_TIMESTAMP
+			OUTPUT INSERTED.idChaucay
+			where idChaucay = @Id
+		
+		End
+else
+	begin
+		select '0';
+	end
+
+go
+
+
+
+create PROCEDURE ThemNhanVien
+-- Trả về 
+--	Id != '0' : thêm thành công
+--	Id == '0' : Đã tồn tại Id
+--	Id == '-1' : Đã tồn tại tên đăng nhập
+--	Id == '-2' : Đã tồn tại tên nhân viên, thêm vào hãy vào tên các kí tự để phân biệt.
+--
+	@Id char(3) ,@Ten nvarchar(30), @TenTaiKhoan char(30), @MatKhau char(6), 
+	@NgaySinh date, @GioiTinh nvarchar(5), @DiaChi nvarchar(50), @Sdt char(10)
+AS
+if exists (select id_NV from db_QLBH.dbo.tbl_nhanvien where id_NV = @Id)
+	begin
+		select 0;
+	end
+else
+	begin
+		if not exists (select id_NV from db_QLBH.dbo.tbl_nhanvien where id_NV = @Id)
+			Begin
+				if exists (select id_NV from db_QLBH.dbo.tbl_nhanvien where tenNV = @Ten)
+					begin
+						select -2;
+					end
+				else
+					begin
+						SET NOCOUNT ON;
+						INSERT INTO tbl_nhanvien (id_NV,tenNV,tenTaiKhoanNV,matKhau,ngaySinh,gioiTinh,diaChi,Sdt,dThoigiantao,dThoigiansua)
+						Output inserted.id_NV
+						VALUES(@Id,@Ten,@TenTaiKhoan,@MatKhau,@NgaySinh,@GioiTinh,@DiaChi,@Sdt,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP)
+					end
+			End
+		else
+			begin
+				select -1;
+			end
+	end
+
+go
+
+create PROCEDURE SuaNhanVien
+-- Trả về 
+--	Id != '0' : sửa thành công
+--	Id == '0' : Không tồn tại Id
+--	Id == '-1' : Đã tồn tại tên đăng nhập
+	@Id char(3) ,@Ten nvarchar(30), @TenTaiKhoan char(30), @MatKhau char(6), 
+	@NgaySinh date, @GioiTinh nvarchar(5), @DiaChi nvarchar(50), @Sdt char(10)
+AS
+if exists (select id_NV from db_QLBH.dbo.tbl_nhanvien where id_NV = @Id)
+	Begin
+		If not exists (select id_NV from db_QLBH.dbo.tbl_nhanvien where id_NV != @Id and tenTaiKhoanNv = @TenTaiKhoan)
+
+			If exists (select id_NV from db_QLBH.dbo.tbl_nhanvien where id_NV != @Id and tenNV = @Ten)
+				begin
+					select '-2';
+				end
+			else
+				begin
+					SET NOCOUNT ON;
+					UPDATE db_QLBH.dbo.tbl_nhanvien 
+					set tenNV = @Ten, tenTaiKhoanNV = @TenTaiKhoan, matKhau = @MatKhau,
+						ngaySinh = @NgaySinh,gioiTinh = @GioiTinh, diaChi= @DiaChi, Sdt = @Sdt, dThoigiansua = CURRENT_TIMESTAMP
+					OUTPUT INSERTED.id_NV
+					where id_NV = @Id
+				end
+		else
+			begin
+				select '-1';
+			end
+	End
+else
+	begin
+		select '0';
+	end
+
+go
